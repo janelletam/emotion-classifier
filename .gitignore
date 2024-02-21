@@ -1,3 +1,4 @@
 data/
 env/
 .vscode/
+Lib/__pycache__/
