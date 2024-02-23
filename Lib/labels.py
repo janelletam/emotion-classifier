@@ -2,19 +2,15 @@
 import os
 
 #---------------------------------------------------------------------------------------------------------
-# TODO: Global labels for emotions as numbers
-# Note: currently the labels currently are only as kept as the generic filenames
-#
-# Note: RAVDESS already has a clear and straightforward labeling for the emotions. The labels are:
-#   01 = neutral
-#   02 = calm
-#   03 = happy
-#   04 = sad
-#   05 = angry
-#   06 = fearful
-#   07 = disgust
-#   08 = surprised
-# Maybe these can be implemented in our global emotion labels...
+# List of the Global Labels for each emotion:
+#   1 = neutral
+#   2 = calm
+#   3 = happy
+#   4 = sad
+#   5 = angry
+#   6 = fearful
+#   7 = disgust
+#   8 = surprised
 #
 # All of the labels for each dataset:
 #   TESS labels: ['angry' 'disgust' 'fear' 'happy' 'neutral' 'ps' 'sad']
@@ -29,11 +25,59 @@ import os
 #   Happy       TESS, CREMA, SAVEE, RAVDESS
 #   Neutral     TESS, CREMA, SAVEE, RAVDESS
 #   Sad         TESS, CREMA, SAVEE, RAVDESS
-#   Surprised   TESS, CREMA, RAVDESS
+#   Surprised   TESS, SAVEE, RAVDESS
 #   Calm        RAVDESS
-#  
 #---------------------------------------------------------------------------------------------------------
 
+# global labels dictionary
+global_labels = {'neutral': 1, 'calm': 2, 'happy': 3, 'sad': 4, 'angry': 5, 'fearful': 6, 'disgust': 7,
+                 'surprised': 8}
+
+# specific label dictionaries for each dataset
+TESS_labels = {'angry': 'angry', 'disgust': 'disgust', 'fear': 'fearful', 'happy': 'happy',
+               'neutral': 'neutral', 'ps': 'surprised', 'sad': 'sad'}
+
+CREMA_labels = {'ANG': 'angry', 'DIS': 'disgust', 'FEA': 'fearful', 'HAP': 'happy', 'NEU': 'neutral',
+                'SAD': 'sad'}
+
+SAVEE_labels = {'a': 'angry', 'd': 'disgust', 'f': 'fearful', 'h': 'happy', 'n': 'neutral', 'sa': 'sad',
+                'su': 'surprised'}
+
+
+# function to covert each dataset's local labeling to the global labels
+def assign_global_labels(dataset, audio_label):
+
+    global global_labels
+    global TESS_labels
+    global CREMA_labels
+    global SAVEE_labels
+
+    converted_label = 0
+
+    # TESS labels: ['angry' 'disgust' 'fear' 'happy' 'neutral' 'ps' 'sad']
+    if dataset == 'TESS':
+        emotion = TESS_labels[audio_label]
+        converted_label = global_labels[emotion]
+
+    # CREMA labels: ['ANG' 'DIS' 'FEA' 'HAP' 'NEU' 'SAD']
+    elif dataset == 'CREMA':
+        emotion = CREMA_labels[audio_label]
+        converted_label = global_labels[emotion]
+
+    # SAVEE labels: ['a' 'd' 'f' 'h' 'n' 'sa' 'su']
+    elif dataset == 'SAVEE':
+        emotion = SAVEE_labels[audio_label]
+        converted_label = global_labels[emotion]
+
+    # RAVDESS labels: ['01' '02' '03' '04' '05' '06' '07' '08']
+    elif dataset == 'RAVDESS': converted_label = int(audio_label)
+
+
+    return converted_label
+
+
+
+# Now, different functions specifically for each filename format in different datasets:
 
 # TESS labels: ['angry' 'disgust' 'fear' 'happy' 'neutral' 'ps' 'sad']
 def TESS():
@@ -43,9 +87,9 @@ def TESS():
 
     # all the information regarding the audio files in TESS will be kept in and returned as TESS_dictionary
     # it will contain:  1. audio's path
-    #                   2. audio's filename
-    #                   3. audio's label
-    TESS_dictionary = {'audio path': [], 'audio name': [], 'label': []}
+    #                   2. audio's dataset label
+    #                   3. audio's global label
+    TESS_dictionary = {'audio path': [], 'dataset label': [], 'label': []}
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for file in dataset_folders:
@@ -54,11 +98,12 @@ def TESS():
         
         for audio in audio_files:
             audio_path = os.path.join(file_path, audio)
-            audio_name = audio[:-4]
             audio_label = audio.split("_")[2][:-4]
+            audio_label_global = assign_global_labels('TESS', audio_label)
+
             TESS_dictionary['audio path'].append(audio_path)
-            TESS_dictionary['audio name'].append(audio_name)
-            TESS_dictionary['label'].append(audio_label)
+            TESS_dictionary['dataset label'].append(audio_label)
+            TESS_dictionary['label'].append(audio_label_global)
 
     return TESS_dictionary
 
@@ -71,18 +116,20 @@ def CREMA():
 
     # all the information regarding the audio files in TESS will be kept in and returned as CREMA_dictionary
     # it will contain:  1. audio's path
-    #                   2. audio's filename
-    #                   3. audio's label
-    CREMA_dictionary = {'audio path': [], 'audio name': [], 'label': []}
+    #                   2. audio's dataset label
+    #                   3. audio's global label
+    CREMA_dictionary = {'audio path': [], 'dataset label': [], 'label': []}
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for audio in audio_files:
         audio_path = os.path.join(dataset_path, audio)
-        audio_name = audio[:-4]
         audio_label = audio.split("_")[2]
+        audio_label_global = assign_global_labels('CREMA', audio_label)
+
         CREMA_dictionary['audio path'].append(audio_path)
-        CREMA_dictionary['audio name'].append(audio_name)
-        CREMA_dictionary['label'].append(audio_label)
+        CREMA_dictionary['dataset label'].append(audio_label)
+        CREMA_dictionary['label'].append(audio_label_global)
+        
 
     return CREMA_dictionary
 
@@ -95,18 +142,19 @@ def SAVEE():
 
     # all the information regarding the audio files in TESS will be kept in and returned as SAVEE_dictionary
     # it will contain:  1. audio's path
-    #                   2. audio's filename
-    #                   3. audio's label
-    SAVEE_dictionary = {'audio path': [], 'audio name': [], 'label': []}
+    #                   2. audio's dataset label
+    #                   3. audio's global label
+    SAVEE_dictionary = {'audio path': [], 'dataset label': [], 'label': []}
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for audio in audio_files:
         audio_path = os.path.join(dataset_path, audio)
-        audio_name = audio[:-4]
         audio_label = audio.split("_")[1][:-6]
+        audio_label_global = assign_global_labels('SAVEE', audio_label)
+
         SAVEE_dictionary['audio path'].append(audio_path)
-        SAVEE_dictionary['audio name'].append(audio_name)
-        SAVEE_dictionary['label'].append(audio_label)
+        SAVEE_dictionary['dataset label'].append(audio_label)
+        SAVEE_dictionary['label'].append(audio_label_global)
 
     return SAVEE_dictionary
 
@@ -130,9 +178,9 @@ def RAVDESS():
 
     # all the information regarding the audio files in TESS will be kept in and returned as RAVDESS_dictionary
     # it will contain:  1. audio's path
-    #                   2. audio's filename
-    #                   3. audio's label
-    RAVDESS_dictionary = {'audio path': [], 'audio name': [], 'label': []}
+    #                   2. audio's dataset label
+    #                   3. audio's global label
+    RAVDESS_dictionary = {'audio path': [], 'dataset label': [], 'label': []}
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for file in dataset_folders:
@@ -141,10 +189,11 @@ def RAVDESS():
         
         for audio in audio_files:
             audio_path = os.path.join(file_path, audio)
-            audio_name = audio[:-4]
             audio_label = (audio.split("-"))[2]
+            audio_label_global = assign_global_labels('RAVDESS', audio_label)
+
             RAVDESS_dictionary['audio path'].append(audio_path)
-            RAVDESS_dictionary['audio name'].append(audio_name)
-            RAVDESS_dictionary['label'].append(audio_label)
+            RAVDESS_dictionary['dataset label'].append(audio_label)
+            RAVDESS_dictionary['label'].append(audio_label_global)
 
     return RAVDESS_dictionary
