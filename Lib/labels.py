@@ -197,3 +197,5 @@ def RAVDESS():
             RAVDESS_dictionary['label'].append(audio_label_global)
 
     return RAVDESS_dictionary
+
+dataset = RAVDESS()
