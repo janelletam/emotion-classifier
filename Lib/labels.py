@@ -198,4 +198,31 @@ def RAVDESS():
 
     return RAVDESS_dictionary
 
-dataset = RAVDESS()
+# Now save the path name of the resampled wav files for each of the datasets
+# I've separated these blocks of code since the resampling can take a while to run
+# and only needs to be run once. However, each time we restart the runtime, 
+# we should be running the code below to save the path name to the datset dicts
+import pandas as pd
+import json
+
+CREMA_dict = CREMA()
+RAVDESS_dict = RAVDESS()
+SAVEE_dict = SAVEE()
+TESS_dict = TESS()
+
+dataset_names = ['CREMA', 'RAVDESS', 'SAVEE', 'TESS']
+datasets = {'CREMA': CREMA_dict, 'RAVDESS': RAVDESS_dict, 'SAVEE': SAVEE_dict, 'TESS': TESS_dict}
+dir_name = "Data/resampled"
+file_name = "Data/dict_contents.txt"
+
+for name in dataset_names:
+    datasets[name]['audio resampled path'] = []
+    for index, audio_path in enumerate(datasets[name]['audio path']):
+        path_name = f"{dir_name}/{name}/{name}_resampled_{index}_emotion_{CREMA_dict['label'][index]}.wav"
+        datasets[name]['audio resampled path'].append(path_name)
+    df = pd.DataFrame(datasets[name])
+    print(df)
+
+with open(file_name, 'w') as f:
+    json.dump(CREMA_dict, f)
+    json.dump(SAVEE_dict, f)
