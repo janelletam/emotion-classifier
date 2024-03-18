@@ -83,8 +83,12 @@ def assign_global_labels(dataset, audio_label):
     # RAVDESS labels: ['01' '02' '03' '04' '05' '06' '07' '08']
     elif dataset == 'RAVDESS': converted_label = int(audio_label)
 
-
     return converted_label
+
+# convert global labels to their respective comprehensible word form label
+def convert_label(label):
+    global global_labels
+    return (list(global_labels.keys())[list(global_labels.values()).index(label)])
 
 # The following are some functions to resize, normalize, and process audio files from each dataset
 # into new files and creates a new directory of processed data
@@ -98,8 +102,12 @@ def resample_and_normalize_data(file_path, target_sr):
 
 def preprocess_dataset(dataset, dataset_dictionary):
     # prevents re-running if the data has already been processed
-    if (os.path.isdir(f"Data\\resampled\\{dataset}")): return
+    if (os.path.isdir(f"Data\\resampled\\{dataset}")):
+        print('Dataset has already been normalized and resampled. Skipping...')
+        return
     
+    print('No processed data found. Processing the dataset...')
+
     for index, audio_path in enumerate(dataset_dictionary['audio path']):
         audio_resampled = resample_and_normalize_data(audio_path, target_sampling_rate)
 
@@ -110,6 +118,7 @@ def preprocess_dataset(dataset, dataset_dictionary):
         # Save audio output as wav file
         sf.write(path_name, audio_resampled, target_sampling_rate)
         librosa.get_samplerate(path_name)
+    print('Dataset normalized and resampled successfully')
 
 # function to add modified audio file's path to dataset dictionaries
 def add_modified_path(dataset, dataset_dictionary):
@@ -179,7 +188,7 @@ def CREMA():
     # preprocess all the audio files and keep the new paths
     preprocess_dataset('CREMA', CREMA_dictionary)
     CREMA_dictionary = add_modified_path('CREMA', CREMA_dictionary)
-        
+
     return CREMA_dictionary
 
 
