@@ -5,14 +5,14 @@ import soundfile as sf
 
 #---------------------------------------------------------------------------------------------------------
 # List of the Global Labels for each emotion:
-#   1 = neutral
-#   2 = calm
-#   3 = happy
-#   4 = sad
-#   5 = angry
-#   6 = fearful
-#   7 = disgust
-#   8 = surprised
+#   0 = neutral
+#   1 = calm
+#   2 = happy
+#   3 = sad
+#   4 = angry
+#   5 = fearful
+#   6 = disgust
+#   7 = surprised
 #
 # All of the labels for each dataset:
 #   TESS labels: ['angry' 'disgust' 'fear' 'happy' 'neutral' 'ps' 'sad']
