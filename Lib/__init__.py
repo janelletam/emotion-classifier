@@ -1,5 +1,7 @@
-
 import os
+import librosa
+import numpy as np
+import soundfile as sf
 
 #---------------------------------------------------------------------------------------------------------
 # List of the Global Labels for each emotion:
@@ -27,11 +29,20 @@ import os
 #   Sad         TESS, CREMA, SAVEE, RAVDESS
 #   Surprised   TESS, SAVEE, RAVDESS
 #   Calm        RAVDESS
+#
+# All the information regarding the audio files in each dataset will be kept in a dictionary as followed:
+# Each dictionary will contain:     1. audio's path
+#                                   2. audio's dataset label
+#                                   3. audio's global label
+#                                   4. modified audio's path
 #---------------------------------------------------------------------------------------------------------
 
 # global labels dictionary
 global_labels = {'neutral': 1, 'calm': 2, 'happy': 3, 'sad': 4, 'angry': 5, 'fearful': 6, 'disgust': 7,
                  'surprised': 8}
+
+# global target sampling rate
+target_sampling_rate = 24000
 
 # specific label dictionaries for each dataset
 TESS_labels = {'angry': 'angry', 'disgust': 'disgust', 'fear': 'fearful', 'happy': 'happy',
@@ -72,9 +83,57 @@ def assign_global_labels(dataset, audio_label):
     # RAVDESS labels: ['01' '02' '03' '04' '05' '06' '07' '08']
     elif dataset == 'RAVDESS': converted_label = int(audio_label)
 
-
     return converted_label
 
+# convert global labels to their respective comprehensible word form label
+def convert_label(label):
+    global global_labels
+    return (list(global_labels.keys())[list(global_labels.values()).index(label)])
+
+# The following are some functions to resize, normalize, and process audio files from each dataset
+# into new files and creates a new directory of processed data
+
+# function to normalize and resamples every file into a specific sample rate (sr)
+def resample_and_normalize_data(file_path, target_sr):
+    audio, sr = librosa.load(file_path)
+    audio_resampled = librosa.resample(audio, orig_sr=sr, target_sr=target_sr)
+    audio_normalized = (audio_resampled - np.mean(audio_resampled)) / np.std(audio_resampled)
+    return audio_normalized
+
+def preprocess_dataset(dataset, dataset_dictionary):
+    # prevents re-running if the data has already been processed
+    if (os.path.isdir(f"Data\\resampled\\{dataset}")):
+        print('Dataset has already been normalized and resampled. Skipping...')
+        return
+    
+    print('No processed data found. Processing the dataset...')
+
+    for index, audio_path in enumerate(dataset_dictionary['audio path']):
+        audio_resampled = resample_and_normalize_data(audio_path, target_sampling_rate)
+
+        # Making directory to store audio files
+        os.makedirs(f"Data\\resampled\\{dataset}", exist_ok=True)
+        path_name = f"Data\\resampled\\{dataset}\\{dataset}_resampled_{index}_emotion_{dataset_dictionary['label'][index]}.wav"
+
+        # Save audio output as wav file
+        sf.write(path_name, audio_resampled, target_sampling_rate)
+        librosa.get_samplerate(path_name)
+    print('Dataset normalized and resampled successfully')
+
+# function to add modified audio file's path to dataset dictionaries
+def add_modified_path(dataset, dataset_dictionary):
+    for index, audio_path in enumerate(dataset_dictionary['audio path']):
+        path_name = f"Data\\resampled\\{dataset}\\{dataset}_resampled_{index}_emotion_{dataset_dictionary['label'][index]}.wav"
+        dataset_dictionary['resampled audio path'].append(path_name)
+    return (dataset_dictionary)
+
+# function to combine multiple dataset dictionaries into one
+def merge_dataset_dictionaries(*dataset_dictionaries):
+    merged_dictionary = {'path': [], 'label': []}  # will return a dictionary with only file paths and their labels
+    for dataset_dictionary in dataset_dictionaries:
+        merged_dictionary['path'] += dataset_dictionary['resampled audio path']
+        merged_dictionary['label'] += dataset_dictionary['label']
+    return merged_dictionary
 
 
 # Now, different functions specifically for each filename format in different datasets:
@@ -85,11 +144,7 @@ def TESS():
     dataset_path = "Data\\TESS"                     # keeps the main path of the dataset
     dataset_folders = os.listdir(dataset_path)      # lists all the folders inside the dataset
 
-    # all the information regarding the audio files in TESS will be kept in and returned as TESS_dictionary
-    # it will contain:  1. audio's path
-    #                   2. audio's dataset label
-    #                   3. audio's global label
-    TESS_dictionary = {'audio path': [], 'dataset label': [], 'label': []}
+    TESS_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': []}
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for file in dataset_folders:
@@ -105,6 +160,10 @@ def TESS():
             TESS_dictionary['dataset label'].append(audio_label)
             TESS_dictionary['label'].append(audio_label_global)
 
+    # preprocess all the audio files and keep the new paths
+    preprocess_dataset('TESS', TESS_dictionary)
+    TESS_dictionary = add_modified_path('TESS', TESS_dictionary)
+    
     return TESS_dictionary
 
 
@@ -114,11 +173,7 @@ def CREMA():
     dataset_path = "Data\\CREMA"                     # keeps the main path of the dataset
     audio_files = os.listdir(dataset_path)           # lists all the folders inside the dataset
 
-    # all the information regarding the audio files in TESS will be kept in and returned as CREMA_dictionary
-    # it will contain:  1. audio's path
-    #                   2. audio's dataset label
-    #                   3. audio's global label
-    CREMA_dictionary = {'audio path': [], 'dataset label': [], 'label': []}
+    CREMA_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': []}
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for audio in audio_files:
@@ -129,7 +184,10 @@ def CREMA():
         CREMA_dictionary['audio path'].append(audio_path)
         CREMA_dictionary['dataset label'].append(audio_label)
         CREMA_dictionary['label'].append(audio_label_global)
-        
+
+    # preprocess all the audio files and keep the new paths
+    preprocess_dataset('CREMA', CREMA_dictionary)
+    CREMA_dictionary = add_modified_path('CREMA', CREMA_dictionary)
 
     return CREMA_dictionary
 
@@ -140,11 +198,7 @@ def SAVEE():
     dataset_path = "Data\\SAVEE"                     # keeps the main path of the dataset
     audio_files = os.listdir(dataset_path)           # lists all the folders inside the dataset
 
-    # all the information regarding the audio files in TESS will be kept in and returned as SAVEE_dictionary
-    # it will contain:  1. audio's path
-    #                   2. audio's dataset label
-    #                   3. audio's global label
-    SAVEE_dictionary = {'audio path': [], 'dataset label': [], 'label': []}
+    SAVEE_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': []}
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for audio in audio_files:
@@ -156,6 +210,10 @@ def SAVEE():
         SAVEE_dictionary['dataset label'].append(audio_label)
         SAVEE_dictionary['label'].append(audio_label_global)
 
+    # preprocess all the audio files and keep the new paths
+    preprocess_dataset('SAVEE', SAVEE_dictionary)
+    SAVEE_dictionary = add_modified_path('SAVEE', SAVEE_dictionary)
+    
     return SAVEE_dictionary
 
 
@@ -176,11 +234,7 @@ def RAVDESS():
     dataset_path = "Data\\RAVDESS"                  # keeps the main path of the dataset
     dataset_folders = os.listdir(dataset_path)      # lists all the folders inside the dataset
 
-    # all the information regarding the audio files in TESS will be kept in and returned as RAVDESS_dictionary
-    # it will contain:  1. audio's path
-    #                   2. audio's dataset label
-    #                   3. audio's global label
-    RAVDESS_dictionary = {'audio path': [], 'dataset label': [], 'label': []}
+    RAVDESS_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': []}
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for file in dataset_folders:
@@ -196,33 +250,8 @@ def RAVDESS():
             RAVDESS_dictionary['dataset label'].append(audio_label)
             RAVDESS_dictionary['label'].append(audio_label_global)
 
+    # preprocess all the audio files and keep the new paths
+    preprocess_dataset('RAVDESS', RAVDESS_dictionary)
+    RAVDESS_dictionary = add_modified_path('RAVDESS', RAVDESS_dictionary)
+
     return RAVDESS_dictionary
-
-# Now save the path name of the resampled wav files for each of the datasets
-# I've separated these blocks of code since the resampling can take a while to run
-# and only needs to be run once. However, each time we restart the runtime, 
-# we should be running the code below to save the path name to the datset dicts
-import pandas as pd
-import json
-
-CREMA_dict = CREMA()
-RAVDESS_dict = RAVDESS()
-SAVEE_dict = SAVEE()
-TESS_dict = TESS()
-
-dataset_names = ['CREMA', 'RAVDESS', 'SAVEE', 'TESS']
-datasets = {'CREMA': CREMA_dict, 'RAVDESS': RAVDESS_dict, 'SAVEE': SAVEE_dict, 'TESS': TESS_dict}
-dir_name = "Data/resampled"
-file_name = "Data/dict_contents.txt"
-
-for name in dataset_names:
-    datasets[name]['audio resampled path'] = []
-    for index, audio_path in enumerate(datasets[name]['audio path']):
-        path_name = f"{dir_name}/{name}/{name}_resampled_{index}_emotion_{CREMA_dict['label'][index]}.wav"
-        datasets[name]['audio resampled path'].append(path_name)
-    df = pd.DataFrame(datasets[name])
-    print(df)
-
-with open(file_name, 'w') as f:
-    json.dump(CREMA_dict, f)
-    json.dump(SAVEE_dict, f)
