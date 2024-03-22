@@ -38,8 +38,8 @@ import soundfile as sf
 #---------------------------------------------------------------------------------------------------------
 
 # global labels dictionary
-global_labels = {'neutral': 1, 'calm': 2, 'happy': 3, 'sad': 4, 'angry': 5, 'fearful': 6, 'disgust': 7,
-                 'surprised': 8}
+global_labels = {'neutral': 0, 'calm': 1, 'happy': 2, 'sad': 3, 'angry': 4, 'fearful': 5, 'disgust': 6,
+                 'surprised': 7}
 
 # global target sampling rate
 target_sampling_rate = 24000
