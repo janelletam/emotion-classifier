@@ -45,15 +45,45 @@ global_labels = {'neutral': 0, 'calm': 1, 'happy': 2, 'sad': 3, 'angry': 4, 'fea
 target_sampling_rate = 24000
 
 # specific label dictionaries for each dataset
-TESS_labels = {'angry': 'angry', 'disgust': 'disgust', 'fear': 'fearful', 'happy': 'happy',
-               'neutral': 'neutral', 'ps': 'surprised', 'sad': 'sad'}
+TESS_labels = {
+    'angry': 'angry',
+    'disgust': 'disgust',
+    'fear': 'fearful',
+    'happy': 'happy',
+    'neutral': 'neutral',
+    'ps': 'surprised',
+    'sad': 'sad'
+}
 
-CREMA_labels = {'ANG': 'angry', 'DIS': 'disgust', 'FEA': 'fearful', 'HAP': 'happy', 'NEU': 'neutral',
-                'SAD': 'sad'}
+CREMA_labels = {
+    'ANG': 'angry',
+    'DIS': 'disgust',
+    'FEA': 'fearful',
+    'HAP': 'happy',
+    'NEU': 'neutral',
+    'SAD': 'sad'
+}
 
-SAVEE_labels = {'a': 'angry', 'd': 'disgust', 'f': 'fearful', 'h': 'happy', 'n': 'neutral', 'sa': 'sad',
-                'su': 'surprised'}
+SAVEE_labels = {
+    'a': 'angry',
+    'd': 'disgust',
+    'f': 'fearful',
+    'h': 'happy',
+    'n': 'neutral',
+    'sa': 'sad',
+    'su': 'surprised'
+}
 
+RAVDESS_labels = {
+    '01': 'neutral',
+    '02': 'calm',
+    '03': 'happy',
+    '04': 'sad',
+    '05': 'angry',
+    '06': 'fearful',
+    '07': 'disgust',
+    '08': 'surprised'
+}
 
 # function to covert each dataset's local labeling to the global labels
 def assign_global_labels(dataset, audio_label):
@@ -81,7 +111,9 @@ def assign_global_labels(dataset, audio_label):
         converted_label = global_labels[emotion]
 
     # RAVDESS labels: ['01' '02' '03' '04' '05' '06' '07' '08']
-    elif dataset == 'RAVDESS': converted_label = int(audio_label)
+    elif dataset == 'RAVDESS':
+        emotion = RAVDESS_labels[audio_label]
+        converted_label = global_labels[emotion]
 
     return converted_label
 
@@ -148,6 +180,9 @@ def TESS():
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for file in dataset_folders:
+        if file == "TESS Toronto emotional speech set data":
+            continue
+
         file_path = os.path.join(dataset_path, file)
         audio_files = os.listdir(file_path)
         
@@ -238,6 +273,9 @@ def RAVDESS():
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for file in dataset_folders:
+        if file == "audio_speech_actors_01-24":
+            continue
+
         file_path = os.path.join(dataset_path, file)
         audio_files = os.listdir(file_path)
         

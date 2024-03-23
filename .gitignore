@@ -2,3 +2,4 @@ data/
 env/
 .vscode/
 Lib/__pycache__/
+Checkpoints/
