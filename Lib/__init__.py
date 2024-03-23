@@ -180,6 +180,9 @@ def TESS():
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for file in dataset_folders:
+        if file == "TESS Toronto emotional speech set data":
+            continue
+
         file_path = os.path.join(dataset_path, file)
         audio_files = os.listdir(file_path)
         
@@ -270,6 +273,9 @@ def RAVDESS():
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for file in dataset_folders:
+        if file == "audio_speech_actors_01-24":
+            continue
+
         file_path = os.path.join(dataset_path, file)
         audio_files = os.listdir(file_path)
         
