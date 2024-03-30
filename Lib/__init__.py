@@ -126,11 +126,16 @@ def convert_label(label):
 # into new files and creates a new directory of processed data
 
 # function to normalize and resamples every file into a specific sample rate (sr)
-def resample_and_normalize_data(file_path, target_sr):
+def resample_data(file_path, target_sr):
     audio, sr = librosa.load(file_path)
     audio_resampled = librosa.resample(audio, orig_sr=sr, target_sr=target_sr)
     audio_normalized = (audio_resampled - np.mean(audio_resampled)) / np.std(audio_resampled)
     return audio_normalized
+
+def normalize_data(audio_file):
+    audio_normalized = (audio_file - np.mean(audio_file)) / np.std(audio_file)
+    return audio_normalized
+
 
 def preprocess_dataset(dataset, dataset_dictionary):
     # prevents re-running if the data has already been processed
@@ -141,14 +146,15 @@ def preprocess_dataset(dataset, dataset_dictionary):
     print('No processed data found. Processing the dataset...')
 
     for index, audio_path in enumerate(dataset_dictionary['audio path']):
-        audio_resampled = resample_and_normalize_data(audio_path, target_sampling_rate)
+        audio_modified = resample_data(audio_path, target_sampling_rate)
+        audio_modified = normalize_data(audio_modified)
 
         # Making directory to store audio files
         os.makedirs(f"Data\\resampled\\{dataset}", exist_ok=True)
         path_name = f"Data\\resampled\\{dataset}\\{dataset}_resampled_{index}_emotion_{dataset_dictionary['label'][index]}.wav"
 
         # Save audio output as wav file
-        sf.write(path_name, audio_resampled, target_sampling_rate)
+        sf.write(path_name, audio_modified, target_sampling_rate)
         librosa.get_samplerate(path_name)
     print('Dataset normalized and resampled successfully')
 
