@@ -164,7 +164,7 @@ def preprocess_dataset(dataset, dataset_dictionary):
 
         # Making directory to store audio files
         os.makedirs(f"Data\\resampled\\{dataset}", exist_ok=True)
-        path_name = f"Data\\resampled\\{dataset}\\{dataset}_resampled_{index}_emotion_{dataset_dictionary['label'][index]}.wav"
+        path_name = f"Data\\resampled\\{dataset}\\{dataset}_resampled_{str(index).zfill(6)}_emotion_{dataset_dictionary['label'][index]}.wav"
 
         # Save audio output as wav file
         sf.write(path_name, audio_modified, target_sampling_rate)
@@ -348,3 +348,40 @@ def EMOdb():
     EMOdb_dictionary = add_modified_path('EMOdb', EMOdb_dictionary)
 
     return EMOdb_dictionary
+
+# In case one wants to just use the resampled data, we ignore all the original datasets and use all the
+# resampled data
+
+def load_resampled():
+    
+    global global_labels
+    
+    dataset_path = 'Data\\resampled'
+    available_datasets = os.listdir(dataset_path)
+    
+    CREMA_dictionary = {'resampled audio path': [], 'label': []}
+    RAVDESS_dictionary = {'resampled audio path': [], 'label': []}
+    SAVEE_dictionary = {'resampled audio path': [], 'label': []}
+    TESS_dictionary = {'resampled audio path': [], 'label': []}
+    EMOdb_dictionary = {'resampled audio path': [], 'label': []}
+    
+    for dataset in available_datasets:
+
+        file_path = os.path.join(dataset_path, dataset)
+        audio_files = os.listdir(file_path)
+        
+        audio_files.sort()
+        
+        if dataset == 'CREMA': print('-----------CREMA:',len(audio_files))
+        
+        dataset_dictionary = locals()[dataset+'_dictionary']
+        
+        for audio in audio_files:
+            
+            audio_path = os.path.join(file_path, audio)
+            audio_label = int((audio.split("_"))[-1][:-4])   # takes only the last section (x.wav) and removes the '.wav'
+            
+            dataset_dictionary['resampled audio path'].append(audio_path)
+            dataset_dictionary['label'].append(audio_label)
+    
+    return CREMA_dictionary, RAVDESS_dictionary, SAVEE_dictionary, TESS_dictionary, EMOdb_dictionary
