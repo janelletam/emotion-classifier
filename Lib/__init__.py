@@ -168,7 +168,7 @@ def preprocess_dataset(dataset, dataset_dictionary):
 # function to add modified audio file's path to dataset dictionaries
 def add_modified_path(dataset, dataset_dictionary):
     for index, audio_path in enumerate(dataset_dictionary['audio path']):
-        path_name = f"Data\\resampled\\{dataset}\\{dataset}_resampled_{index}_emotion_{dataset_dictionary['label'][index]}.wav"
+        path_name = f"Data\\resampled\\{dataset}\\{dataset}_resampled_{str(index).zfill(6)}_emotion_{dataset_dictionary['label'][index]}.wav"
         dataset_dictionary['resampled audio path'].append(path_name)
     return (dataset_dictionary)
 
