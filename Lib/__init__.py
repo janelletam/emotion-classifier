@@ -19,14 +19,15 @@ import soundfile as sf
 #   CREMA labels: ['ANG' 'DIS' 'FEA' 'HAP' 'NEU' 'SAD']
 #   SAVEE labels: ['a' 'd' 'f' 'h' 'n' 'sa' 'su']
 #   RAVDESS labels: ['01' '02' '03' '04' '05' '06' '07' '08']
+#   EMOdb labels (German): ['W' 'L' 'E' 'A' 'F' 'T' 'N']
 #
 # All of the emotions appeared which appeared in the datasets:
 #   Angry       TESS, CREMA, SAVEE, RAVDESS
 #   Disgust     TESS, CREMA, SAVEE, RAVDESS
-#   Fear        TESS, CREMA, SAVEE, RAVDESS
-#   Happy       TESS, CREMA, SAVEE, RAVDESS
-#   Neutral     TESS, CREMA, SAVEE, RAVDESS
-#   Sad         TESS, CREMA, SAVEE, RAVDESS
+#   Fear        TESS, CREMA, SAVEE, RAVDESS, EMOdb
+#   Happy       TESS, CREMA, SAVEE, RAVDESS, EMOdb
+#   Neutral     TESS, CREMA, SAVEE, RAVDESS, EMOdb
+#   Sad         TESS, CREMA, SAVEE, RAVDESS, EMOdb
 #   Surprised   TESS, SAVEE, RAVDESS
 #   Calm        RAVDESS
 #
@@ -38,8 +39,8 @@ import soundfile as sf
 #---------------------------------------------------------------------------------------------------------
 
 # global labels dictionary
-global_labels = {'neutral': 0, 'calm': 1, 'happy': 2, 'sad': 3, 'angry': 4, 'fearful': 5, 'disgust': 6,
-                 'surprised': 7}
+global_labels = {'neutral': 0, 'happy': 1, 'sad': 2, 'angry': 3, 'fearful': 4, 'disgust': 5,
+                 'surprised': 6}
 
 # global target sampling rate
 target_sampling_rate = 24000
@@ -76,13 +77,19 @@ SAVEE_labels = {
 
 RAVDESS_labels = {
     '01': 'neutral',
-    '02': 'calm',
     '03': 'happy',
     '04': 'sad',
     '05': 'angry',
     '06': 'fearful',
     '07': 'disgust',
     '08': 'surprised'
+}
+
+EMOdb_labels = {
+    'A': 'fearful',
+    'F': 'happy',
+    'T': 'sad',
+    'N': 'neutral'
 }
 
 # function to covert each dataset's local labeling to the global labels
@@ -92,6 +99,7 @@ def assign_global_labels(dataset, audio_label):
     global TESS_labels
     global CREMA_labels
     global SAVEE_labels
+    global EMOdb_labels
 
     converted_label = 0
 
@@ -110,9 +118,14 @@ def assign_global_labels(dataset, audio_label):
         emotion = SAVEE_labels[audio_label]
         converted_label = global_labels[emotion]
 
-    # RAVDESS labels: ['01' '02' '03' '04' '05' '06' '07' '08']
+    # RAVDESS labels: ['01' '03' '04' '05' '06' '07' '08']
     elif dataset == 'RAVDESS':
         emotion = RAVDESS_labels[audio_label]
+        converted_label = global_labels[emotion]
+
+    # EMOdb labels: ['A' 'F' 'T' 'N']
+    elif dataset == 'EMOdb':
+        emotion = EMOdb_labels[audio_label]
         converted_label = global_labels[emotion]
 
     return converted_label
@@ -255,7 +268,7 @@ def SAVEE():
 # RAVDESS labels:
 #
 #   01 = neutral
-#   02 = calm
+#   02 = calm (skipping)
 #   03 = happy
 #   04 = sad
 #   05 = angry
@@ -282,6 +295,10 @@ def RAVDESS():
         for audio in audio_files:
             audio_path = os.path.join(file_path, audio)
             audio_label = (audio.split("-"))[2]
+
+            # Skip calm
+            if audio_label == '02':
+                continue
             audio_label_global = assign_global_labels('RAVDESS', audio_label)
 
             RAVDESS_dictionary['audio path'].append(audio_path)
@@ -293,3 +310,35 @@ def RAVDESS():
     RAVDESS_dictionary = add_modified_path('RAVDESS', RAVDESS_dictionary)
 
     return RAVDESS_dictionary
+
+# EMOdb labels:
+#
+#       A = anxiety/fear
+#       F = happiness
+#       T = sadness
+#       N = neutral
+#       NOTE: We only care about anxiety (fear), happiness, sadness, and neutral
+#       since we want to augment our dataset
+#
+def EMOdb():
+    dataset_path = "Data\\EMOdb"                  # keeps the main path of the dataset
+    audio_files = os.listdir(dataset_path)      # lists all the folders inside the dataset
+
+    EMOdb_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': []}
+
+    # going through each file in the dataset and extract the information about all the audio files inside
+    for audio in audio_files:
+        audio_path = os.path.join(dataset_path, audio)
+        audio_label = audio[5]
+        if audio_label in ['A', 'F', 'T', 'N']:
+            audio_label_global = assign_global_labels('EMOdb', audio_label)
+
+            EMOdb_dictionary['audio path'].append(audio_path)
+            EMOdb_dictionary['dataset label'].append(audio_label)
+            EMOdb_dictionary['label'].append(audio_label_global)
+
+    # preprocess all the audio files and keep the new paths
+    preprocess_dataset('EMOdb', EMOdb_dictionary)
+    EMOdb_dictionary = add_modified_path('EMOdb', EMOdb_dictionary)
+
+    return EMOdb_dictionary
