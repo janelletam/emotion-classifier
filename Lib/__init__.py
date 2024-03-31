@@ -324,7 +324,10 @@ def SAVEE():
         SAVEE_dictionary['label'].append(audio_label_global)
 
     # preprocess all the audio files and keep the new paths
-    remove_silence_dataset('SAVEE', SAVEE_dictionary)
+    # remove_silence_dataset('SAVEE', SAVEE_dictionary)
+
+    print("Skipping generation of audio files without silence.")
+    SAVEE_dictionary['no silence path'] = SAVEE_dictionary['audio path']
     preprocess_dataset('SAVEE', SAVEE_dictionary)
     SAVEE_dictionary = add_modified_path('SAVEE', SAVEE_dictionary)
     
@@ -419,7 +422,7 @@ def load_resampled():
     
     global global_labels
     
-    dataset_path = 'Data\\resampled'
+    dataset_path = 'Data\\resampled_no_silence'      # separate directory for resampled data that have no silent portions
     available_datasets = os.listdir(dataset_path)
     
     CREMA_dictionary = {'resampled audio path': [], 'label': []}
