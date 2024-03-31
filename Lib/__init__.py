@@ -160,7 +160,6 @@ def remove_silence(input_path, output_path, min_silence_length_ms=500, silence_t
         output += chunk
 
     output.export(output_path, format="wav")
-    print("it worked")
     return output 
 
 
@@ -192,7 +191,6 @@ def preprocess_dataset(dataset, dataset_dictionary):
         os.makedirs(f"Data\\no_silence\\{dataset}", exist_ok=True)
         
     for index, audio_path in enumerate(dataset_dictionary['audio path']):
-        print(audio_path)
         # Generate audio without silent segements
         silence_modified_path = f"Data\\no_silence\\{dataset}\\{dataset}_sil_{str(index).zfill(6)}_emotion_{dataset_dictionary['label'][index]}.wav"
         if generate_no_silence:
@@ -200,7 +198,9 @@ def preprocess_dataset(dataset, dataset_dictionary):
 
         audio_modified = resample_data(silence_modified_path, target_sampling_rate)
         audio_modified = normalize_data(audio_modified)
-        audio_modified = repeat_audio(audio_modified, sr=target_sampling_rate, min_target_length=5)
+        
+        if len(audio_modified) != 0:
+            audio_modified = repeat_audio(audio_modified, sr=target_sampling_rate, min_target_length=5)
 
         # Save audio output as wav file
         resampled_path = f"Data\\resampled_no_silence\\{dataset}\\{dataset}_resampled_{str(index).zfill(6)}_emotion_{dataset_dictionary['label'][index]}.wav"
