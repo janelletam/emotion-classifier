@@ -151,7 +151,7 @@ def normalize_data(audio_file):
     audio_normalized = (audio_file - np.mean(audio_file)) / np.std(audio_file)
     return audio_normalized
 
-def remove_silence(input_path, output_path, min_silence_length_ms=500, silence_threshold=-40):
+def remove_silence(input_path, output_path, min_silence_length_ms=300, silence_threshold=-50):
     audio = AudioSegment.from_file(input_path)
     chunks = split_on_silence(audio, min_silence_len = min_silence_length_ms, silence_thresh=silence_threshold)
     output = AudioSegment.empty()
@@ -163,7 +163,7 @@ def remove_silence(input_path, output_path, min_silence_length_ms=500, silence_t
     return output 
 
 
-def repeat_audio(audio, sr=24000, min_target_length=5):
+def repeat_audio(audio, sr=24000, min_target_length=4):
     length_s = len(audio)/float(sr)
 
     if length_s < min_target_length:
@@ -172,31 +172,47 @@ def repeat_audio(audio, sr=24000, min_target_length=5):
     
     return audio
 
+def remove_silence_dataset(dataset, dataset_dictionary):
+    # Prevents re-generating silence-cropped audio
+    if (os.path.isdir(f"Data\\no_silence\\{dataset}")):
+        print('Dataset has already had silence cut from audio. Skipping... ')
+        return
+    
+    print('No silence-cropped data found. Generating audio without silence...')
+    os.makedirs(f"Data\\no_silence\\{dataset}", exist_ok=True)
+        
+    dataset_dictionary['no silence path'] = []
+    
+    if dataset == "RAVDESS":
+        sil_thresh = -65
+    elif dataset == "SAVEE":
+        sil_thresh = -45
+    else:
+        sil_thresh = -50
+
+    for index, audio_path in enumerate(dataset_dictionary['audio path']):
+        # Generate audio without silent segments
+        silence_modified_path = f"Data\\no_silence\\{dataset}\\{dataset}_sil_{str(index).zfill(6)}_emotion_{dataset_dictionary['label'][index]}.wav"
+        remove_silence(audio_path, silence_modified_path, silence_threshold=sil_thresh)
+
+        dataset_dictionary['no silence path'].append(silence_modified_path)
+        
+    print('Dataset successfully cropped without silence segments.')
+    return
+
 
 def preprocess_dataset(dataset, dataset_dictionary):
-    # prevents re-running if the data has already been processed
+    # Prevents re-running if the data has already been processed
     if (os.path.isdir(f"Data\\resampled_no_silence\\{dataset}")):
         print('Dataset has already been normalized and resampled. Skipping...')
         return
     
     print('No processed data found. Processing the dataset...')
     os.makedirs(f"Data\\resampled_no_silence\\{dataset}", exist_ok=True)
-
-    generate_no_silence = True
-    # prevents re-generating silence-cropped audio
-    if (os.path.isdir(f"Data\\no_silence\\{dataset}")):
-        print('Dataset has already had silence cut from audio. Proceeding to resampling and normalization.')
-        generate_no_silence = False
-    else:
-        os.makedirs(f"Data\\no_silence\\{dataset}", exist_ok=True)
         
-    for index, audio_path in enumerate(dataset_dictionary['audio path']):
-        # Generate audio without silent segements
-        silence_modified_path = f"Data\\no_silence\\{dataset}\\{dataset}_sil_{str(index).zfill(6)}_emotion_{dataset_dictionary['label'][index]}.wav"
-        if generate_no_silence:
-            remove_silence(audio_path, silence_modified_path)
-
-        audio_modified = resample_data(silence_modified_path, target_sampling_rate)
+    for index, audio_path in enumerate(dataset_dictionary['no silence path']):
+        # Resampling and normalizing
+        audio_modified = resample_data(audio_path, target_sampling_rate)
         audio_modified = normalize_data(audio_modified)
         
         if len(audio_modified) != 0:
@@ -207,6 +223,7 @@ def preprocess_dataset(dataset, dataset_dictionary):
         sf.write(resampled_path, audio_modified, target_sampling_rate)
         librosa.get_samplerate(resampled_path)
     print('Dataset normalized and resampled successfully.')
+    return
 
 
 # function to add modified audio file's path to dataset dictionaries
@@ -253,6 +270,8 @@ def TESS():
             TESS_dictionary['label'].append(audio_label_global)
 
     # preprocess all the audio files and keep the new paths
+    print("Skipping generation of audio files without silence.")
+    TESS_dictionary['no silence path'] = TESS_dictionary['audio path']
     preprocess_dataset('TESS', TESS_dictionary)
     TESS_dictionary = add_modified_path('TESS', TESS_dictionary)
     
@@ -278,6 +297,8 @@ def CREMA():
         CREMA_dictionary['label'].append(audio_label_global)
 
     # preprocess all the audio files and keep the new paths
+    print("Skipping generation of audio files without silence.")
+    CREMA_dictionary['no silence path'] = CREMA_dictionary['audio path']
     preprocess_dataset('CREMA', CREMA_dictionary)
     CREMA_dictionary = add_modified_path('CREMA', CREMA_dictionary)
 
@@ -303,6 +324,7 @@ def SAVEE():
         SAVEE_dictionary['label'].append(audio_label_global)
 
     # preprocess all the audio files and keep the new paths
+    remove_silence_dataset('SAVEE', SAVEE_dictionary)
     preprocess_dataset('SAVEE', SAVEE_dictionary)
     SAVEE_dictionary = add_modified_path('SAVEE', SAVEE_dictionary)
     
@@ -350,6 +372,7 @@ def RAVDESS():
             RAVDESS_dictionary['label'].append(audio_label_global)
 
     # preprocess all the audio files and keep the new paths
+    remove_silence_dataset('RAVDESS', RAVDESS_dictionary)
     preprocess_dataset('RAVDESS', RAVDESS_dictionary)
     RAVDESS_dictionary = add_modified_path('RAVDESS', RAVDESS_dictionary)
 
@@ -382,6 +405,8 @@ def EMOdb():
             EMOdb_dictionary['label'].append(audio_label_global)
 
     # preprocess all the audio files and keep the new paths
+    print("Skipping generation of audio files without silence.")
+    EMOdb_dictionary['no silence path'] = EMOdb_dictionary['audio path']
     preprocess_dataset('EMOdb', EMOdb_dictionary)
     EMOdb_dictionary = add_modified_path('EMOdb', EMOdb_dictionary)
 
