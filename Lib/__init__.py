@@ -2,6 +2,8 @@ import os
 import librosa
 import numpy as np
 import soundfile as sf
+from pydub import AudioSegment
+from pydub.silence import split_on_silence
 
 #---------------------------------------------------------------------------------------------------------
 # List of the Global Labels for each emotion:
@@ -149,27 +151,63 @@ def normalize_data(audio_file):
     audio_normalized = (audio_file - np.mean(audio_file)) / np.std(audio_file)
     return audio_normalized
 
+def remove_silence(input_path, output_path, min_silence_length_ms=500, silence_threshold=-40):
+    audio = AudioSegment.from_file(input_path)
+    chunks = split_on_silence(audio, min_silence_len = min_silence_length_ms, silence_thresh=silence_threshold)
+    output = AudioSegment.empty()
+
+    for chunk in chunks:    # reassemble non-silent segments
+        output += chunk
+
+    output.export(output_path, format="wav")
+    print("it worked")
+    return output 
+
+
+def repeat_audio(audio, sr=24000, min_target_length=5):
+    length_s = len(audio)/float(sr)
+
+    if length_s < min_target_length:
+        n = np.ceil(min_target_length*sr/len(audio))
+        audio = np.tile(audio,int(n))
+    
+    return audio
+
 
 def preprocess_dataset(dataset, dataset_dictionary):
     # prevents re-running if the data has already been processed
-    if (os.path.isdir(f"Data\\resampled\\{dataset}")):
+    if (os.path.isdir(f"Data\\resampled_no_silence\\{dataset}")):
         print('Dataset has already been normalized and resampled. Skipping...')
         return
     
     print('No processed data found. Processing the dataset...')
+    os.makedirs(f"Data\\resampled_no_silence\\{dataset}", exist_ok=True)
 
+    generate_no_silence = True
+    # prevents re-generating silence-cropped audio
+    if (os.path.isdir(f"Data\\no_silence\\{dataset}")):
+        print('Dataset has already had silence cut from audio. Proceeding to resampling and normalization.')
+        generate_no_silence = False
+    else:
+        os.makedirs(f"Data\\no_silence\\{dataset}", exist_ok=True)
+        
     for index, audio_path in enumerate(dataset_dictionary['audio path']):
-        audio_modified = resample_data(audio_path, target_sampling_rate)
-        audio_modified = normalize_data(audio_modified)
+        print(audio_path)
+        # Generate audio without silent segements
+        silence_modified_path = f"Data\\no_silence\\{dataset}\\{dataset}_sil_{str(index).zfill(6)}_emotion_{dataset_dictionary['label'][index]}.wav"
+        if generate_no_silence:
+            remove_silence(audio_path, silence_modified_path)
 
-        # Making directory to store audio files
-        os.makedirs(f"Data\\resampled\\{dataset}", exist_ok=True)
-        path_name = f"Data\\resampled\\{dataset}\\{dataset}_resampled_{str(index).zfill(6)}_emotion_{dataset_dictionary['label'][index]}.wav"
+        audio_modified = resample_data(silence_modified_path, target_sampling_rate)
+        audio_modified = normalize_data(audio_modified)
+        audio_modified = repeat_audio(audio_modified, sr=target_sampling_rate, min_target_length=5)
 
         # Save audio output as wav file
-        sf.write(path_name, audio_modified, target_sampling_rate)
-        librosa.get_samplerate(path_name)
-    print('Dataset normalized and resampled successfully')
+        resampled_path = f"Data\\resampled_no_silence\\{dataset}\\{dataset}_resampled_{str(index).zfill(6)}_emotion_{dataset_dictionary['label'][index]}.wav"
+        sf.write(resampled_path, audio_modified, target_sampling_rate)
+        librosa.get_samplerate(resampled_path)
+    print('Dataset normalized and resampled successfully.')
+
 
 # function to add modified audio file's path to dataset dictionaries
 def add_modified_path(dataset, dataset_dictionary):
