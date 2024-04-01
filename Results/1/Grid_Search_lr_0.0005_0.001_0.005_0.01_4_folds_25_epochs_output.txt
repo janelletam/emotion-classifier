@@ -1,0 +1,852 @@
+-----LEARNING RATE: 0.0005-----
+Fold 1
+-------
+Epoch [1/25], Loss: 2.0303, Training Accuracy: 20.63%
+Validation Accuracy: 29.63%
+Epoch [2/25], Loss: 1.9363, Training Accuracy: 33.22%
+Validation Accuracy: 38.06%
+Epoch [3/25], Loss: 1.8873, Training Accuracy: 38.56%
+Validation Accuracy: 40.61%
+Epoch [4/25], Loss: 1.8642, Training Accuracy: 40.06%
+Validation Accuracy: 40.28%
+Epoch [5/25], Loss: 1.8531, Training Accuracy: 41.57%
+Validation Accuracy: 42.17%
+Epoch [6/25], Loss: 1.8245, Training Accuracy: 44.26%
+Validation Accuracy: 46.77%
+Epoch [7/25], Loss: 1.7996, Training Accuracy: 47.12%
+Validation Accuracy: 49.24%
+Epoch [8/25], Loss: 1.7798, Training Accuracy: 49.23%
+Validation Accuracy: 48.38%
+Epoch [9/25], Loss: 1.7735, Training Accuracy: 49.88%
+Validation Accuracy: 49.77%
+Epoch [10/25], Loss: 1.7615, Training Accuracy: 50.82%
+Validation Accuracy: 49.86%
+Epoch [11/25], Loss: 1.7625, Training Accuracy: 50.86%
+Validation Accuracy: 49.82%
+Epoch [12/25], Loss: 1.7534, Training Accuracy: 51.52%
+Validation Accuracy: 50.76%
+Epoch [13/25], Loss: 1.7429, Training Accuracy: 52.66%
+Validation Accuracy: 50.68%
+Epoch [14/25], Loss: 1.7324, Training Accuracy: 54.03%
+Validation Accuracy: 50.27%
+Epoch [15/25], Loss: 1.7299, Training Accuracy: 54.45%
+Validation Accuracy: 50.92%
+Epoch [16/25], Loss: 1.7320, Training Accuracy: 53.80%
+Validation Accuracy: 51.38%
+Epoch [17/25], Loss: 1.7211, Training Accuracy: 55.21%
+Validation Accuracy: 52.98%
+Epoch [18/25], Loss: 1.7149, Training Accuracy: 55.87%
+Validation Accuracy: 52.40%
+Epoch [19/25], Loss: 1.7027, Training Accuracy: 57.18%
+Validation Accuracy: 53.64%
+Epoch [20/25], Loss: 1.7032, Training Accuracy: 57.06%
+Validation Accuracy: 51.54%
+Epoch [21/25], Loss: 1.6977, Training Accuracy: 57.37%
+Validation Accuracy: 53.10%
+Epoch [22/25], Loss: 1.6919, Training Accuracy: 58.07%
+Validation Accuracy: 52.69%
+Epoch [23/25], Loss: 1.6886, Training Accuracy: 58.39%
+Validation Accuracy: 53.80%
+Epoch [24/25], Loss: 1.6777, Training Accuracy: 59.87%
+Validation Accuracy: 53.84%
+Epoch [25/25], Loss: 1.6748, Training Accuracy: 60.07%
+Validation Accuracy: 54.34%
+saved restore point
+Fold 2
+-------
+Epoch [1/25], Loss: 1.9994, Training Accuracy: 25.89%
+Validation Accuracy: 32.44%
+Epoch [2/25], Loss: 1.8910, Training Accuracy: 38.51%
+Validation Accuracy: 40.25%
+Epoch [3/25], Loss: 1.8584, Training Accuracy: 40.91%
+Validation Accuracy: 39.72%
+Epoch [4/25], Loss: 1.8467, Training Accuracy: 42.39%
+Validation Accuracy: 40.25%
+Epoch [5/25], Loss: 1.8360, Training Accuracy: 43.06%
+Validation Accuracy: 41.00%
+Epoch [6/25], Loss: 1.8223, Training Accuracy: 44.66%
+Validation Accuracy: 43.30%
+Epoch [7/25], Loss: 1.7996, Training Accuracy: 47.36%
+Validation Accuracy: 47.00%
+Epoch [8/25], Loss: 1.7864, Training Accuracy: 48.54%
+Validation Accuracy: 47.08%
+Epoch [9/25], Loss: 1.7721, Training Accuracy: 50.03%
+Validation Accuracy: 47.70%
+Epoch [10/25], Loss: 1.7654, Training Accuracy: 50.68%
+Validation Accuracy: 49.96%
+Epoch [11/25], Loss: 1.7499, Training Accuracy: 52.21%
+Validation Accuracy: 48.03%
+Epoch [12/25], Loss: 1.7534, Training Accuracy: 51.58%
+Validation Accuracy: 50.25%
+Epoch [13/25], Loss: 1.7416, Training Accuracy: 53.06%
+Validation Accuracy: 51.52%
+Epoch [14/25], Loss: 1.7357, Training Accuracy: 53.75%
+Validation Accuracy: 51.85%
+Epoch [15/25], Loss: 1.7385, Training Accuracy: 53.57%
+Validation Accuracy: 51.60%
+Epoch [16/25], Loss: 1.7223, Training Accuracy: 55.34%
+Validation Accuracy: 51.23%
+Epoch [17/25], Loss: 1.7158, Training Accuracy: 55.54%
+Validation Accuracy: 53.33%
+Epoch [18/25], Loss: 1.7065, Training Accuracy: 56.74%
+Validation Accuracy: 52.59%
+Epoch [19/25], Loss: 1.7066, Training Accuracy: 56.65%
+Validation Accuracy: 52.63%
+Epoch [20/25], Loss: 1.6957, Training Accuracy: 57.82%
+Validation Accuracy: 52.75%
+Epoch [21/25], Loss: 1.6917, Training Accuracy: 58.31%
+Validation Accuracy: 52.80%
+Epoch [22/25], Loss: 1.6910, Training Accuracy: 58.13%
+Validation Accuracy: 52.92%
+Epoch [23/25], Loss: 1.6766, Training Accuracy: 59.93%
+Validation Accuracy: 53.50%
+Epoch [24/25], Loss: 1.6677, Training Accuracy: 60.82%
+Validation Accuracy: 54.48%
+Epoch [25/25], Loss: 1.6705, Training Accuracy: 60.45%
+Validation Accuracy: 53.58%
+saved restore point
+Fold 3
+-------
+Epoch [1/25], Loss: 2.0281, Training Accuracy: 21.61%
+Validation Accuracy: 28.95%
+Epoch [2/25], Loss: 1.9363, Training Accuracy: 33.70%
+Validation Accuracy: 36.72%
+Epoch [3/25], Loss: 1.8855, Training Accuracy: 38.19%
+Validation Accuracy: 41.08%
+Epoch [4/25], Loss: 1.8435, Training Accuracy: 42.88%
+Validation Accuracy: 42.93%
+Epoch [5/25], Loss: 1.8193, Training Accuracy: 45.54%
+Validation Accuracy: 44.57%
+Epoch [6/25], Loss: 1.8003, Training Accuracy: 47.06%
+Validation Accuracy: 45.39%
+Epoch [7/25], Loss: 1.7897, Training Accuracy: 48.10%
+Validation Accuracy: 46.30%
+Epoch [8/25], Loss: 1.7773, Training Accuracy: 49.13%
+Validation Accuracy: 46.96%
+Epoch [9/25], Loss: 1.7730, Training Accuracy: 49.73%
+Validation Accuracy: 45.44%
+Epoch [10/25], Loss: 1.7607, Training Accuracy: 50.95%
+Validation Accuracy: 49.18%
+Epoch [11/25], Loss: 1.7496, Training Accuracy: 52.31%
+Validation Accuracy: 48.03%
+Epoch [12/25], Loss: 1.7515, Training Accuracy: 52.04%
+Validation Accuracy: 49.26%
+Epoch [13/25], Loss: 1.7436, Training Accuracy: 52.93%
+Validation Accuracy: 49.63%
+Epoch [14/25], Loss: 1.7400, Training Accuracy: 52.99%
+Validation Accuracy: 48.68%
+Epoch [15/25], Loss: 1.7358, Training Accuracy: 53.60%
+Validation Accuracy: 49.55%
+Epoch [16/25], Loss: 1.7275, Training Accuracy: 54.67%
+Validation Accuracy: 50.16%
+Epoch [17/25], Loss: 1.7198, Training Accuracy: 55.52%
+Validation Accuracy: 50.99%
+Epoch [18/25], Loss: 1.7128, Training Accuracy: 56.30%
+Validation Accuracy: 50.41%
+Epoch [19/25], Loss: 1.7119, Training Accuracy: 56.20%
+Validation Accuracy: 51.32%
+Epoch [20/25], Loss: 1.7175, Training Accuracy: 55.50%
+Validation Accuracy: 50.62%
+Epoch [21/25], Loss: 1.7089, Training Accuracy: 56.34%
+Validation Accuracy: 52.18%
+Epoch [22/25], Loss: 1.6935, Training Accuracy: 58.02%
+Validation Accuracy: 52.10%
+Epoch [23/25], Loss: 1.6842, Training Accuracy: 59.18%
+Validation Accuracy: 52.34%
+Epoch [24/25], Loss: 1.6820, Training Accuracy: 59.27%
+Validation Accuracy: 51.97%
+Epoch [25/25], Loss: 1.6757, Training Accuracy: 59.94%
+Validation Accuracy: 53.70%
+saved restore point
+Fold 4
+-------
+Epoch [1/25], Loss: 2.0234, Training Accuracy: 21.08%
+Validation Accuracy: 29.52%
+Epoch [2/25], Loss: 1.9103, Training Accuracy: 36.51%
+Validation Accuracy: 35.57%
+Epoch [3/25], Loss: 1.8637, Training Accuracy: 40.32%
+Validation Accuracy: 38.65%
+Epoch [4/25], Loss: 1.8471, Training Accuracy: 42.03%
+Validation Accuracy: 41.28%
+Epoch [5/25], Loss: 1.8278, Training Accuracy: 43.96%
+Validation Accuracy: 43.87%
+Epoch [6/25], Loss: 1.7952, Training Accuracy: 48.02%
+Validation Accuracy: 46.46%
+Epoch [7/25], Loss: 1.7815, Training Accuracy: 48.73%
+Validation Accuracy: 47.04%
+Epoch [8/25], Loss: 1.7652, Training Accuracy: 50.82%
+Validation Accuracy: 47.04%
+Epoch [9/25], Loss: 1.7673, Training Accuracy: 50.38%
+Validation Accuracy: 49.14%
+Epoch [10/25], Loss: 1.7544, Training Accuracy: 51.56%
+Validation Accuracy: 49.63%
+Epoch [11/25], Loss: 1.7458, Training Accuracy: 52.71%
+Validation Accuracy: 50.86%
+Epoch [12/25], Loss: 1.7362, Training Accuracy: 53.76%
+Validation Accuracy: 51.15%
+Epoch [13/25], Loss: 1.7328, Training Accuracy: 54.20%
+Validation Accuracy: 50.33%
+Epoch [14/25], Loss: 1.7266, Training Accuracy: 54.28%
+Validation Accuracy: 51.03%
+Epoch [15/25], Loss: 1.7207, Training Accuracy: 54.97%
+Validation Accuracy: 52.06%
+Epoch [16/25], Loss: 1.7157, Training Accuracy: 55.65%
+Validation Accuracy: 49.84%
+Epoch [17/25], Loss: 1.7193, Training Accuracy: 55.42%
+Validation Accuracy: 52.88%
+Epoch [18/25], Loss: 1.6991, Training Accuracy: 57.48%
+Validation Accuracy: 52.55%
+Epoch [19/25], Loss: 1.6937, Training Accuracy: 58.34%
+Validation Accuracy: 53.70%
+Epoch [20/25], Loss: 1.6894, Training Accuracy: 58.52%
+Validation Accuracy: 53.78%
+Epoch [21/25], Loss: 1.6860, Training Accuracy: 59.08%
+Validation Accuracy: 53.04%
+Epoch [22/25], Loss: 1.6832, Training Accuracy: 58.91%
+Validation Accuracy: 52.88%
+Epoch [23/25], Loss: 1.6753, Training Accuracy: 60.08%
+Validation Accuracy: 54.11%
+Epoch [24/25], Loss: 1.6712, Training Accuracy: 60.49%
+Validation Accuracy: 53.54%
+Epoch [25/25], Loss: 1.6735, Training Accuracy: 60.35%
+Validation Accuracy: 53.78%
+saved restore point
+-----LEARNING RATE: 0.001-----
+Fold 1
+-------
+Epoch [1/25], Loss: 2.0166, Training Accuracy: 23.53%
+Validation Accuracy: 32.55%
+Epoch [2/25], Loss: 1.8891, Training Accuracy: 37.72%
+Validation Accuracy: 44.43%
+Epoch [3/25], Loss: 1.8173, Training Accuracy: 45.31%
+Validation Accuracy: 44.55%
+Epoch [4/25], Loss: 1.8063, Training Accuracy: 45.97%
+Validation Accuracy: 48.42%
+Epoch [5/25], Loss: 1.7842, Training Accuracy: 48.26%
+Validation Accuracy: 47.84%
+Epoch [6/25], Loss: 1.7715, Training Accuracy: 49.84%
+Validation Accuracy: 49.53%
+Epoch [7/25], Loss: 1.7676, Training Accuracy: 50.05%
+Validation Accuracy: 51.13%
+Epoch [8/25], Loss: 1.7449, Training Accuracy: 52.73%
+Validation Accuracy: 50.14%
+Epoch [9/25], Loss: 1.7300, Training Accuracy: 54.21%
+Validation Accuracy: 51.09%
+Epoch [10/25], Loss: 1.7255, Training Accuracy: 54.70%
+Validation Accuracy: 51.42%
+Epoch [11/25], Loss: 1.7213, Training Accuracy: 54.82%
+Validation Accuracy: 52.08%
+Epoch [12/25], Loss: 1.7109, Training Accuracy: 56.10%
+Validation Accuracy: 51.79%
+Epoch [13/25], Loss: 1.7157, Training Accuracy: 55.58%
+Validation Accuracy: 52.90%
+Epoch [14/25], Loss: 1.6938, Training Accuracy: 57.99%
+Validation Accuracy: 53.35%
+Epoch [15/25], Loss: 1.6868, Training Accuracy: 58.62%
+Validation Accuracy: 53.84%
+Epoch [16/25], Loss: 1.6885, Training Accuracy: 58.48%
+Validation Accuracy: 54.54%
+Epoch [17/25], Loss: 1.6751, Training Accuracy: 59.53%
+Validation Accuracy: 53.31%
+Epoch [18/25], Loss: 1.6683, Training Accuracy: 60.76%
+Validation Accuracy: 53.06%
+Epoch [19/25], Loss: 1.6594, Training Accuracy: 61.51%
+Validation Accuracy: 52.12%
+Epoch [20/25], Loss: 1.6646, Training Accuracy: 61.07%
+Validation Accuracy: 55.24%
+Epoch [21/25], Loss: 1.6478, Training Accuracy: 62.58%
+Validation Accuracy: 56.02%
+Epoch [22/25], Loss: 1.6433, Training Accuracy: 63.10%
+Validation Accuracy: 53.84%
+Epoch [23/25], Loss: 1.6368, Training Accuracy: 63.86%
+Validation Accuracy: 55.53%
+Epoch [24/25], Loss: 1.6297, Training Accuracy: 64.53%
+Validation Accuracy: 55.20%
+Epoch [25/25], Loss: 1.6183, Training Accuracy: 65.50%
+Validation Accuracy: 56.10%
+saved restore point
+Fold 2
+-------
+Epoch [1/25], Loss: 1.9878, Training Accuracy: 26.97%
+Validation Accuracy: 30.72%
+Epoch [2/25], Loss: 1.8759, Training Accuracy: 39.11%
+Validation Accuracy: 43.42%
+Epoch [3/25], Loss: 1.8144, Training Accuracy: 45.80%
+Validation Accuracy: 45.02%
+Epoch [4/25], Loss: 1.7902, Training Accuracy: 47.92%
+Validation Accuracy: 46.34%
+Epoch [5/25], Loss: 1.7809, Training Accuracy: 48.42%
+Validation Accuracy: 48.89%
+Epoch [6/25], Loss: 1.7618, Training Accuracy: 50.66%
+Validation Accuracy: 48.03%
+Epoch [7/25], Loss: 1.7618, Training Accuracy: 50.68%
+Validation Accuracy: 50.04%
+Epoch [8/25], Loss: 1.7436, Training Accuracy: 52.86%
+Validation Accuracy: 50.45%
+Epoch [9/25], Loss: 1.7292, Training Accuracy: 54.24%
+Validation Accuracy: 51.73%
+Epoch [10/25], Loss: 1.7224, Training Accuracy: 54.80%
+Validation Accuracy: 50.95%
+Epoch [11/25], Loss: 1.7026, Training Accuracy: 56.87%
+Validation Accuracy: 51.73%
+Epoch [12/25], Loss: 1.7042, Training Accuracy: 56.64%
+Validation Accuracy: 52.96%
+Epoch [13/25], Loss: 1.6928, Training Accuracy: 58.02%
+Validation Accuracy: 52.43%
+Epoch [14/25], Loss: 1.6952, Training Accuracy: 57.68%
+Validation Accuracy: 52.01%
+Epoch [15/25], Loss: 1.6876, Training Accuracy: 58.46%
+Validation Accuracy: 51.97%
+Epoch [16/25], Loss: 1.6732, Training Accuracy: 60.20%
+Validation Accuracy: 50.29%
+Epoch [17/25], Loss: 1.6766, Training Accuracy: 59.19%
+Validation Accuracy: 53.04%
+Epoch [18/25], Loss: 1.6567, Training Accuracy: 61.90%
+Validation Accuracy: 53.17%
+Epoch [19/25], Loss: 1.6496, Training Accuracy: 62.57%
+Validation Accuracy: 55.06%
+Epoch [20/25], Loss: 1.6381, Training Accuracy: 63.67%
+Validation Accuracy: 54.03%
+Epoch [21/25], Loss: 1.6315, Training Accuracy: 64.18%
+Validation Accuracy: 53.29%
+Epoch [22/25], Loss: 1.6247, Training Accuracy: 65.29%
+Validation Accuracy: 54.52%
+Epoch [23/25], Loss: 1.6128, Training Accuracy: 66.26%
+Validation Accuracy: 53.87%
+Epoch [24/25], Loss: 1.6106, Training Accuracy: 66.36%
+Validation Accuracy: 55.43%
+Epoch [25/25], Loss: 1.6002, Training Accuracy: 67.41%
+Validation Accuracy: 54.40%
+saved restore point
+Fold 3
+-------
+Epoch [1/25], Loss: 2.0107, Training Accuracy: 23.97%
+Validation Accuracy: 32.11%
+Epoch [2/25], Loss: 1.8863, Training Accuracy: 38.29%
+Validation Accuracy: 43.54%
+Epoch [3/25], Loss: 1.8290, Training Accuracy: 44.05%
+Validation Accuracy: 48.77%
+Epoch [4/25], Loss: 1.7926, Training Accuracy: 47.73%
+Validation Accuracy: 49.01%
+Epoch [5/25], Loss: 1.7729, Training Accuracy: 49.57%
+Validation Accuracy: 50.58%
+Epoch [6/25], Loss: 1.7607, Training Accuracy: 50.79%
+Validation Accuracy: 50.12%
+Epoch [7/25], Loss: 1.7450, Training Accuracy: 52.73%
+Validation Accuracy: 48.93%
+Epoch [8/25], Loss: 1.7391, Training Accuracy: 53.12%
+Validation Accuracy: 51.48%
+Epoch [9/25], Loss: 1.7197, Training Accuracy: 55.27%
+Validation Accuracy: 52.01%
+Epoch [10/25], Loss: 1.7197, Training Accuracy: 55.23%
+Validation Accuracy: 51.69%
+Epoch [11/25], Loss: 1.7063, Training Accuracy: 56.37%
+Validation Accuracy: 54.48%
+Epoch [12/25], Loss: 1.6931, Training Accuracy: 58.13%
+Validation Accuracy: 53.12%
+Epoch [13/25], Loss: 1.6820, Training Accuracy: 59.18%
+Validation Accuracy: 52.75%
+Epoch [14/25], Loss: 1.6748, Training Accuracy: 60.02%
+Validation Accuracy: 53.74%
+Epoch [15/25], Loss: 1.6713, Training Accuracy: 59.98%
+Validation Accuracy: 53.78%
+Epoch [16/25], Loss: 1.6555, Training Accuracy: 61.85%
+Validation Accuracy: 54.24%
+Epoch [17/25], Loss: 1.6578, Training Accuracy: 61.57%
+Validation Accuracy: 53.62%
+Epoch [18/25], Loss: 1.6418, Training Accuracy: 63.35%
+Validation Accuracy: 52.63%
+Epoch [19/25], Loss: 1.6392, Training Accuracy: 63.64%
+Validation Accuracy: 54.61%
+Epoch [20/25], Loss: 1.6306, Training Accuracy: 64.46%
+Validation Accuracy: 53.08%
+Epoch [21/25], Loss: 1.6248, Training Accuracy: 65.14%
+Validation Accuracy: 53.21%
+Epoch [22/25], Loss: 1.6154, Training Accuracy: 66.04%
+Validation Accuracy: 53.78%
+Epoch [23/25], Loss: 1.6097, Training Accuracy: 66.62%
+Validation Accuracy: 53.62%
+Epoch [24/25], Loss: 1.6113, Training Accuracy: 66.36%
+Validation Accuracy: 53.66%
+Epoch [25/25], Loss: 1.6006, Training Accuracy: 67.34%
+Validation Accuracy: 54.19%
+saved restore point
+Fold 4
+-------
+Epoch [1/25], Loss: 1.9815, Training Accuracy: 27.34%
+Validation Accuracy: 35.90%
+Epoch [2/25], Loss: 1.8861, Training Accuracy: 37.76%
+Validation Accuracy: 41.32%
+Epoch [3/25], Loss: 1.8368, Training Accuracy: 43.33%
+Validation Accuracy: 45.15%
+Epoch [4/25], Loss: 1.7918, Training Accuracy: 47.66%
+Validation Accuracy: 46.92%
+Epoch [5/25], Loss: 1.7743, Training Accuracy: 49.69%
+Validation Accuracy: 46.79%
+Epoch [6/25], Loss: 1.7552, Training Accuracy: 51.56%
+Validation Accuracy: 48.40%
+Epoch [7/25], Loss: 1.7512, Training Accuracy: 51.80%
+Validation Accuracy: 49.71%
+Epoch [8/25], Loss: 1.7340, Training Accuracy: 53.64%
+Validation Accuracy: 49.63%
+Epoch [9/25], Loss: 1.7266, Training Accuracy: 54.65%
+Validation Accuracy: 49.79%
+Epoch [10/25], Loss: 1.7227, Training Accuracy: 54.95%
+Validation Accuracy: 51.69%
+Epoch [11/25], Loss: 1.7064, Training Accuracy: 56.76%
+Validation Accuracy: 50.70%
+Epoch [12/25], Loss: 1.7048, Training Accuracy: 56.80%
+Validation Accuracy: 51.73%
+Epoch [13/25], Loss: 1.6953, Training Accuracy: 57.48%
+Validation Accuracy: 52.80%
+Epoch [14/25], Loss: 1.6877, Training Accuracy: 58.59%
+Validation Accuracy: 53.04%
+Epoch [15/25], Loss: 1.6838, Training Accuracy: 58.67%
+Validation Accuracy: 51.81%
+Epoch [16/25], Loss: 1.6733, Training Accuracy: 59.98%
+Validation Accuracy: 52.80%
+Epoch [17/25], Loss: 1.6658, Training Accuracy: 60.90%
+Validation Accuracy: 52.63%
+Epoch [18/25], Loss: 1.6497, Training Accuracy: 62.46%
+Validation Accuracy: 54.73%
+Epoch [19/25], Loss: 1.6518, Training Accuracy: 62.29%
+Validation Accuracy: 53.70%
+Epoch [20/25], Loss: 1.6462, Training Accuracy: 62.67%
+Validation Accuracy: 54.11%
+Epoch [21/25], Loss: 1.6299, Training Accuracy: 64.49%
+Validation Accuracy: 54.73%
+Epoch [22/25], Loss: 1.6210, Training Accuracy: 65.12%
+Validation Accuracy: 55.14%
+Epoch [23/25], Loss: 1.6221, Training Accuracy: 65.15%
+Validation Accuracy: 53.74%
+Epoch [24/25], Loss: 1.6173, Training Accuracy: 65.70%
+Validation Accuracy: 54.03%
+Epoch [25/25], Loss: 1.6025, Training Accuracy: 67.42%
+Validation Accuracy: 55.10%
+saved restore point
+-----LEARNING RATE: 0.005-----
+Fold 1
+-------
+Epoch [1/25], Loss: 1.9967, Training Accuracy: 25.93%
+Validation Accuracy: 33.46%
+Epoch [2/25], Loss: 1.9012, Training Accuracy: 36.33%
+Validation Accuracy: 39.01%
+Epoch [3/25], Loss: 1.8713, Training Accuracy: 39.34%
+Validation Accuracy: 40.69%
+Epoch [4/25], Loss: 1.8326, Training Accuracy: 42.97%
+Validation Accuracy: 43.81%
+Epoch [5/25], Loss: 1.7973, Training Accuracy: 46.86%
+Validation Accuracy: 44.51%
+Epoch [6/25], Loss: 1.7892, Training Accuracy: 47.60%
+Validation Accuracy: 46.73%
+Epoch [7/25], Loss: 1.7775, Training Accuracy: 48.99%
+Validation Accuracy: 47.84%
+Epoch [8/25], Loss: 1.7514, Training Accuracy: 51.55%
+Validation Accuracy: 49.65%
+Epoch [9/25], Loss: 1.7176, Training Accuracy: 55.36%
+Validation Accuracy: 52.36%
+Epoch [10/25], Loss: 1.7307, Training Accuracy: 53.85%
+Validation Accuracy: 51.50%
+Epoch [11/25], Loss: 1.7164, Training Accuracy: 55.48%
+Validation Accuracy: 53.68%
+Epoch [12/25], Loss: 1.7123, Training Accuracy: 55.59%
+Validation Accuracy: 53.27%
+Epoch [13/25], Loss: 1.6992, Training Accuracy: 56.95%
+Validation Accuracy: 52.61%
+Epoch [14/25], Loss: 1.7033, Training Accuracy: 57.04%
+Validation Accuracy: 53.06%
+Epoch [15/25], Loss: 1.6873, Training Accuracy: 58.33%
+Validation Accuracy: 52.36%
+Epoch [16/25], Loss: 1.6937, Training Accuracy: 57.44%
+Validation Accuracy: 54.21%
+Epoch [17/25], Loss: 1.6753, Training Accuracy: 59.38%
+Validation Accuracy: 55.24%
+Epoch [18/25], Loss: 1.6849, Training Accuracy: 58.57%
+Validation Accuracy: 54.21%
+Epoch [19/25], Loss: 1.6780, Training Accuracy: 59.20%
+Validation Accuracy: 54.71%
+Epoch [20/25], Loss: 1.6683, Training Accuracy: 60.14%
+Validation Accuracy: 53.64%
+Epoch [21/25], Loss: 1.6684, Training Accuracy: 60.21%
+Validation Accuracy: 54.30%
+Epoch [22/25], Loss: 1.6697, Training Accuracy: 60.03%
+Validation Accuracy: 54.58%
+Epoch [23/25], Loss: 1.6762, Training Accuracy: 59.53%
+Validation Accuracy: 55.08%
+Epoch [24/25], Loss: 1.6676, Training Accuracy: 60.33%
+Validation Accuracy: 54.87%
+Epoch [25/25], Loss: 1.6680, Training Accuracy: 60.47%
+Validation Accuracy: 53.39%
+saved restore point
+Fold 2
+-------
+Epoch [1/25], Loss: 1.9928, Training Accuracy: 25.49%
+Validation Accuracy: 32.24%
+Epoch [2/25], Loss: 1.8844, Training Accuracy: 37.77%
+Validation Accuracy: 40.75%
+Epoch [3/25], Loss: 1.8608, Training Accuracy: 40.37%
+Validation Accuracy: 42.72%
+Epoch [4/25], Loss: 1.8427, Training Accuracy: 42.31%
+Validation Accuracy: 42.85%
+Epoch [5/25], Loss: 1.8320, Training Accuracy: 43.31%
+Validation Accuracy: 40.62%
+Epoch [6/25], Loss: 1.8244, Training Accuracy: 43.88%
+Validation Accuracy: 42.72%
+Epoch [7/25], Loss: 1.8183, Training Accuracy: 44.72%
+Validation Accuracy: 44.70%
+Epoch [8/25], Loss: 1.8059, Training Accuracy: 46.16%
+Validation Accuracy: 44.12%
+Epoch [9/25], Loss: 1.8155, Training Accuracy: 45.20%
+Validation Accuracy: 45.44%
+Epoch [10/25], Loss: 1.8032, Training Accuracy: 46.44%
+Validation Accuracy: 44.37%
+Epoch [11/25], Loss: 1.7926, Training Accuracy: 47.79%
+Validation Accuracy: 44.04%
+Epoch [12/25], Loss: 1.7979, Training Accuracy: 47.09%
+Validation Accuracy: 45.56%
+Epoch [13/25], Loss: 1.7884, Training Accuracy: 48.10%
+Validation Accuracy: 43.09%
+Epoch [14/25], Loss: 1.7898, Training Accuracy: 47.86%
+Validation Accuracy: 47.57%
+Epoch [15/25], Loss: 1.7654, Training Accuracy: 50.19%
+Validation Accuracy: 46.63%
+Epoch [16/25], Loss: 1.7568, Training Accuracy: 51.38%
+Validation Accuracy: 50.41%
+Epoch [17/25], Loss: 1.7718, Training Accuracy: 50.10%
+Validation Accuracy: 47.70%
+Epoch [18/25], Loss: 1.7492, Training Accuracy: 51.95%
+Validation Accuracy: 51.15%
+Epoch [19/25], Loss: 1.7439, Training Accuracy: 52.84%
+Validation Accuracy: 51.11%
+Epoch [20/25], Loss: 1.7450, Training Accuracy: 52.56%
+Validation Accuracy: 49.47%
+Epoch [21/25], Loss: 1.7325, Training Accuracy: 53.80%
+Validation Accuracy: 49.92%
+Epoch [22/25], Loss: 1.7365, Training Accuracy: 53.58%
+Validation Accuracy: 50.29%
+Epoch [23/25], Loss: 1.7616, Training Accuracy: 51.10%
+Validation Accuracy: 47.82%
+Epoch [24/25], Loss: 1.7689, Training Accuracy: 50.23%
+Validation Accuracy: 49.79%
+Epoch [25/25], Loss: 1.7403, Training Accuracy: 53.10%
+Validation Accuracy: 52.34%
+saved restore point
+Fold 3
+-------
+Epoch [1/25], Loss: 2.0322, Training Accuracy: 19.50%
+Validation Accuracy: 29.89%
+Epoch [2/25], Loss: 1.9040, Training Accuracy: 35.97%
+Validation Accuracy: 40.01%
+Epoch [3/25], Loss: 1.8545, Training Accuracy: 41.18%
+Validation Accuracy: 42.93%
+Epoch [4/25], Loss: 1.8284, Training Accuracy: 43.63%
+Validation Accuracy: 46.18%
+Epoch [5/25], Loss: 1.8011, Training Accuracy: 46.51%
+Validation Accuracy: 47.08%
+Epoch [6/25], Loss: 1.7906, Training Accuracy: 47.49%
+Validation Accuracy: 49.01%
+Epoch [7/25], Loss: 1.7774, Training Accuracy: 48.76%
+Validation Accuracy: 48.52%
+Epoch [8/25], Loss: 1.7652, Training Accuracy: 50.50%
+Validation Accuracy: 49.34%
+Epoch [9/25], Loss: 1.7674, Training Accuracy: 49.86%
+Validation Accuracy: 49.84%
+Epoch [10/25], Loss: 1.7576, Training Accuracy: 50.90%
+Validation Accuracy: 48.81%
+Epoch [11/25], Loss: 1.7495, Training Accuracy: 51.80%
+Validation Accuracy: 49.34%
+Epoch [12/25], Loss: 1.7393, Training Accuracy: 52.88%
+Validation Accuracy: 49.63%
+Epoch [13/25], Loss: 1.7600, Training Accuracy: 50.91%
+Validation Accuracy: 50.90%
+Epoch [14/25], Loss: 1.7516, Training Accuracy: 51.73%
+Validation Accuracy: 48.31%
+Epoch [15/25], Loss: 1.7381, Training Accuracy: 53.05%
+Validation Accuracy: 49.75%
+Epoch [16/25], Loss: 1.7279, Training Accuracy: 54.17%
+Validation Accuracy: 51.48%
+Epoch [17/25], Loss: 1.7115, Training Accuracy: 55.82%
+Validation Accuracy: 53.41%
+Epoch [18/25], Loss: 1.7031, Training Accuracy: 56.76%
+Validation Accuracy: 53.58%
+Epoch [19/25], Loss: 1.6946, Training Accuracy: 57.85%
+Validation Accuracy: 52.43%
+Epoch [20/25], Loss: 1.7028, Training Accuracy: 56.79%
+Validation Accuracy: 52.30%
+Epoch [21/25], Loss: 1.7035, Training Accuracy: 56.82%
+Validation Accuracy: 52.34%
+Epoch [22/25], Loss: 1.6889, Training Accuracy: 58.17%
+Validation Accuracy: 54.11%
+Epoch [23/25], Loss: 1.6809, Training Accuracy: 58.93%
+Validation Accuracy: 52.38%
+Epoch [24/25], Loss: 1.6949, Training Accuracy: 57.45%
+Validation Accuracy: 54.24%
+Epoch [25/25], Loss: 1.6734, Training Accuracy: 59.44%
+Validation Accuracy: 53.25%
+saved restore point
+Fold 4
+-------
+Epoch [1/25], Loss: 2.0395, Training Accuracy: 19.97%
+Validation Accuracy: 28.04%
+Epoch [2/25], Loss: 1.9105, Training Accuracy: 35.54%
+Validation Accuracy: 39.27%
+Epoch [3/25], Loss: 1.8750, Training Accuracy: 39.40%
+Validation Accuracy: 39.72%
+Epoch [4/25], Loss: 1.8573, Training Accuracy: 41.30%
+Validation Accuracy: 40.62%
+Epoch [5/25], Loss: 1.8479, Training Accuracy: 41.77%
+Validation Accuracy: 43.22%
+Epoch [6/25], Loss: 1.8083, Training Accuracy: 46.18%
+Validation Accuracy: 45.56%
+Epoch [7/25], Loss: 1.7975, Training Accuracy: 46.88%
+Validation Accuracy: 46.79%
+Epoch [8/25], Loss: 1.7763, Training Accuracy: 49.16%
+Validation Accuracy: 47.82%
+Epoch [9/25], Loss: 1.7660, Training Accuracy: 50.39%
+Validation Accuracy: 48.89%
+Epoch [10/25], Loss: 1.7685, Training Accuracy: 49.66%
+Validation Accuracy: 47.57%
+Epoch [11/25], Loss: 1.7666, Training Accuracy: 50.42%
+Validation Accuracy: 48.23%
+Epoch [12/25], Loss: 1.7542, Training Accuracy: 51.50%
+Validation Accuracy: 48.56%
+Epoch [13/25], Loss: 1.7455, Training Accuracy: 52.36%
+Validation Accuracy: 50.08%
+Epoch [14/25], Loss: 1.7401, Training Accuracy: 52.72%
+Validation Accuracy: 48.27%
+Epoch [15/25], Loss: 1.7356, Training Accuracy: 53.06%
+Validation Accuracy: 49.67%
+Epoch [16/25], Loss: 1.7320, Training Accuracy: 53.39%
+Validation Accuracy: 50.00%
+Epoch [17/25], Loss: 1.7338, Training Accuracy: 53.47%
+Validation Accuracy: 51.56%
+Epoch [18/25], Loss: 1.7231, Training Accuracy: 54.46%
+Validation Accuracy: 51.32%
+Epoch [19/25], Loss: 1.7193, Training Accuracy: 54.89%
+Validation Accuracy: 49.51%
+Epoch [20/25], Loss: 1.7250, Training Accuracy: 54.43%
+Validation Accuracy: 49.67%
+Epoch [21/25], Loss: 1.7268, Training Accuracy: 54.38%
+Validation Accuracy: 50.08%
+Epoch [22/25], Loss: 1.7276, Training Accuracy: 54.21%
+Validation Accuracy: 50.12%
+Epoch [23/25], Loss: 1.7248, Training Accuracy: 54.82%
+Validation Accuracy: 49.30%
+Epoch [24/25], Loss: 1.7103, Training Accuracy: 55.97%
+Validation Accuracy: 49.71%
+Epoch [25/25], Loss: 1.7053, Training Accuracy: 56.58%
+Validation Accuracy: 50.66%
+saved restore point
+-----LEARNING RATE: 0.01-----
+Fold 1
+-------
+Epoch [1/25], Loss: 2.1163, Training Accuracy: 15.62%
+Validation Accuracy: 15.99%
+Epoch [2/25], Loss: 2.1165, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [3/25], Loss: 2.1167, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [4/25], Loss: 2.1171, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [5/25], Loss: 2.1178, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [6/25], Loss: 2.1171, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [7/25], Loss: 2.1171, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [8/25], Loss: 2.1164, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [9/25], Loss: 2.1168, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [10/25], Loss: 2.1165, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [11/25], Loss: 2.1164, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [12/25], Loss: 2.1167, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [13/25], Loss: 2.1161, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [14/25], Loss: 2.1163, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [15/25], Loss: 2.1170, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [16/25], Loss: 2.1172, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [17/25], Loss: 2.1165, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [18/25], Loss: 2.1171, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [19/25], Loss: 2.1167, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [20/25], Loss: 2.1172, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [21/25], Loss: 2.1167, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [22/25], Loss: 2.1168, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [23/25], Loss: 2.1172, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [24/25], Loss: 2.1167, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+Epoch [25/25], Loss: 2.1170, Training Accuracy: 15.72%
+Validation Accuracy: 15.99%
+saved restore point
+Fold 2
+-------
+Epoch [1/25], Loss: 2.1165, Training Accuracy: 15.28%
+Validation Accuracy: 16.57%
+Epoch [2/25], Loss: 2.1175, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [3/25], Loss: 2.1174, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [4/25], Loss: 2.1174, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [5/25], Loss: 2.1178, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [6/25], Loss: 2.1178, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [7/25], Loss: 2.1174, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [8/25], Loss: 2.1171, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [9/25], Loss: 2.1181, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [10/25], Loss: 2.1174, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [11/25], Loss: 2.1178, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [12/25], Loss: 2.1179, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [13/25], Loss: 2.1179, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [14/25], Loss: 2.1167, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [15/25], Loss: 2.1181, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [16/25], Loss: 2.1185, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [17/25], Loss: 2.1170, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [18/25], Loss: 2.1178, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [19/25], Loss: 2.1178, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [20/25], Loss: 2.1189, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [21/25], Loss: 2.1178, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [22/25], Loss: 2.1173, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [23/25], Loss: 2.1171, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [24/25], Loss: 2.1186, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+Epoch [25/25], Loss: 2.1181, Training Accuracy: 15.62%
+Validation Accuracy: 16.57%
+saved restore point
+Fold 3
+-------
+Epoch [1/25], Loss: 2.1302, Training Accuracy: 14.21%
+Validation Accuracy: 13.45%
+Epoch [2/25], Loss: 2.1336, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [3/25], Loss: 2.1328, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [4/25], Loss: 2.1330, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [5/25], Loss: 2.1334, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [6/25], Loss: 2.1339, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [7/25], Loss: 2.1334, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [8/25], Loss: 2.1334, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [9/25], Loss: 2.1328, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [10/25], Loss: 2.1325, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [11/25], Loss: 2.1324, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [12/25], Loss: 2.1330, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [13/25], Loss: 2.1329, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [14/25], Loss: 2.1330, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [15/25], Loss: 2.1330, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [16/25], Loss: 2.1326, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [17/25], Loss: 2.1330, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [18/25], Loss: 2.1338, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [19/25], Loss: 2.1334, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [20/25], Loss: 2.1339, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [21/25], Loss: 2.1341, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [22/25], Loss: 2.1329, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [23/25], Loss: 2.1329, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [24/25], Loss: 2.1334, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+Epoch [25/25], Loss: 2.1332, Training Accuracy: 14.09%
+Validation Accuracy: 13.45%
+saved restore point
+Fold 4
+-------
+Epoch [1/25], Loss: 2.1173, Training Accuracy: 15.05%
+Validation Accuracy: 16.32%
+Epoch [2/25], Loss: 2.1174, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [3/25], Loss: 2.1177, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [4/25], Loss: 2.1177, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [5/25], Loss: 2.1175, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [6/25], Loss: 2.1185, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [7/25], Loss: 2.1186, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [8/25], Loss: 2.1186, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [9/25], Loss: 2.1173, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [10/25], Loss: 2.1179, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [11/25], Loss: 2.1178, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [12/25], Loss: 2.1179, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [13/25], Loss: 2.1181, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [14/25], Loss: 2.1173, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [15/25], Loss: 2.1175, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [16/25], Loss: 2.1167, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [17/25], Loss: 2.1171, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [18/25], Loss: 2.1185, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [19/25], Loss: 2.1193, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [20/25], Loss: 2.1179, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [21/25], Loss: 2.1183, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [22/25], Loss: 2.1166, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [23/25], Loss: 2.1178, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [24/25], Loss: 2.1175, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+Epoch [25/25], Loss: 2.1183, Training Accuracy: 15.61%
+Validation Accuracy: 16.32%
+saved restore point

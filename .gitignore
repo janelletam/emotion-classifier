@@ -3,3 +3,5 @@ env/
 .vscode/
 Lib/__pycache__/
 Checkpoints/
+wandb/
+Results/Checkpoints/
