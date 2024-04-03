@@ -151,6 +151,7 @@ def normalize_data(audio_file):
     audio_normalized = (audio_file - np.mean(audio_file)) / np.std(audio_file)
     return audio_normalized
 
+# function to remove silence from audio
 def remove_silence(input_path, output_path, min_silence_length_ms=300, silence_threshold=-50):
     audio = AudioSegment.from_file(input_path)
     chunks = split_on_silence(audio, min_silence_len = min_silence_length_ms, silence_thresh=silence_threshold)
@@ -162,7 +163,7 @@ def remove_silence(input_path, output_path, min_silence_length_ms=300, silence_t
     output.export(output_path, format="wav")
     return output 
 
-
+# function to repeat audio file until it has length of at least min_target_length
 def repeat_audio(audio, sr=24000, min_target_length=4):
     length_s = len(audio)/float(sr)
 
@@ -215,8 +216,9 @@ def preprocess_dataset(dataset, dataset_dictionary):
         audio_modified = resample_data(audio_path, target_sampling_rate)
         audio_modified = normalize_data(audio_modified)
         
+        # Repeat audio until at least 3s (if needed)
         if len(audio_modified) != 0:
-            audio_modified = repeat_audio(audio_modified, sr=target_sampling_rate, min_target_length=5)
+            audio_modified = repeat_audio(audio_modified, sr=target_sampling_rate, min_target_length=3)
 
         # Save audio output as wav file
         resampled_path = f"Data\\resampled_no_silence\\{dataset}\\{dataset}_resampled_{str(index).zfill(6)}_emotion_{dataset_dictionary['label'][index]}.wav"
