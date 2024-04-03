@@ -203,12 +203,12 @@ def remove_silence_dataset(dataset, dataset_dictionary):
 
 def preprocess_dataset(dataset, dataset_dictionary):
     # Prevents re-running if the data has already been processed
-    if (os.path.isdir(f"Data\\resampled_no_silence\\{dataset}")):
+    if (os.path.isdir(f"Data\\resampled_no_silence_no_looping\\{dataset}")):
         print('Dataset has already been normalized and resampled. Skipping...')
         return
     
     print('No processed data found. Processing the dataset...')
-    os.makedirs(f"Data\\resampled_no_silence\\{dataset}", exist_ok=True)
+    os.makedirs(f"Data\\resampled_no_silence_no_looping\\{dataset}", exist_ok=True)
         
     for index, audio_path in enumerate(dataset_dictionary['no silence path']):
         # Resampling and normalizing
@@ -220,7 +220,7 @@ def preprocess_dataset(dataset, dataset_dictionary):
         #    audio_modified = repeat_audio(audio_modified, sr=target_sampling_rate, min_target_length=5)
 
         # Save audio output as wav file
-        resampled_path = f"Data\\resampled_no_silence\\{dataset}\\{dataset}_resampled_{str(index).zfill(6)}_emotion_{dataset_dictionary['label'][index]}.wav"
+        resampled_path = f"Data\\resampled_no_silence_no_looping\\{dataset}\\{dataset}_resampled_{str(index).zfill(6)}_emotion_{dataset_dictionary['label'][index]}.wav"
         sf.write(resampled_path, audio_modified, target_sampling_rate)
         librosa.get_samplerate(resampled_path)
     print('Dataset normalized and resampled successfully.')
@@ -423,7 +423,7 @@ def load_resampled():
     
     global global_labels
     
-    dataset_path = 'Data\\resampled_no_silence'      # separate directory for resampled data that have no silent portions
+    dataset_path = 'Data\\resampled_no_silence_no_looping'      # separate directory for resampled data that have no silent portions
     available_datasets = os.listdir(dataset_path)
     
     CREMA_dictionary = {'resampled audio path': [], 'label': []}
