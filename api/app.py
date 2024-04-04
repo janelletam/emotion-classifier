@@ -7,20 +7,26 @@ from pydub.silence import split_on_silence
 import librosa
 import soundfile as sf
 import numpy as np
-
+import torch
+import torch.optim as optim
+from model import CNNModel
 
 app = Flask(__name__)
 
-model_filepath = "test"      # to edit
-model = pickle.load(open(model_filepath, 'rb'))
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+model_path = '../ModelWeights/trained_model.pth' # to edit
+model = CNNModel(num_classes=7).to(device)
+model.load_state_dict(torch.load(model_path, map_location=torch.device(device)))
 
 
 @app.route('/predict', methods=['POST'])
 def predict():
     audio_file = request.files['audio']
-    
+
     # Process the audio_file (convert to wav, remove silence, resample, normalize)
     mfccs = convert_to_mfcc(audio_file)
+    model.eval()
     prediction = model(mfccs)
 
     return jsonify({'prediction': prediction})
@@ -65,9 +71,7 @@ def normalize_data(audio_file):
  
 
 def pad_audio(audio, sr, desired_length_in_sec):
-    # desired_length is desired length of audio in seconds
     # audio is the raw audio signal as numpy array from librosa
-    # sr is sampling rate
     desired_length = int(sr * desired_length_in_sec)
 
     # Truncate if too long
@@ -91,12 +95,7 @@ def extract_mfccs(file_path=None, audio=None, n_mfcc=13):
         
     audio = pad_audio(audio, sr, 4.0)
 
-    # This returns an mfcc where the COLUMNS correspond to the frames of the audio,
-    # and ROWS represent features
     mfcc = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=n_mfcc)
-
-    # This extracts info about the first and second derivative of the mfcc
-    # so we can get an idea of how the audio changes over time
     delta_mfcc  = librosa.feature.delta(mfcc)
     delta2_mfcc = librosa.feature.delta(mfcc, order=2)
 
@@ -105,10 +104,8 @@ def extract_mfccs(file_path=None, audio=None, n_mfcc=13):
 
     # Normalize mfccs
     combined_matrix = (combined_matrix - np.mean(combined_matrix, axis=0)) / np.std(combined_matrix, axis=0)
-    # print("Combined matrix shape before transpose:", combined_matrix.shape)
 
-    # We transpose so that the ROWS correspond to the frames of the audio, 
-    # while COLUMNS represent features
+    # We transpose so that the ROWS correspond to the frames of the audio, while COLUMNS represent features
     transposed_matrix = np.transpose(combined_matrix, [1, 0])
     return transposed_matrix
 
@@ -129,17 +126,15 @@ def convert_to_mfcc(audio_file):
     resampled_audio = resample_data(no_silence_path, target_sr=target_sampling_rate)
     normalized_audio = normalize_data(resampled_audio)
     
-    # normalized_path = f'{wav_filename}_normalized'
-    # sf.write(normalized_path, normalized_audio, target_sampling_rate)
     mfccs = extract_mfccs(audio=normalized_audio)
 
     # Delete the temporary WAV file
     os.remove(wav_filename)
     os.remove(no_silence_path)
-    # os.remove(normalized_path)
 
     return mfccs
 
 
 if __name__ == '__main__':
     app.run(debug=True)
+
