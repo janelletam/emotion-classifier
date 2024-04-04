@@ -4,6 +4,7 @@ import numpy as np
 import soundfile as sf
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
+import pickle
 
 #---------------------------------------------------------------------------------------------------------
 # List of the Global Labels for each emotion:
@@ -177,14 +178,19 @@ def remove_silence_dataset(dataset, dataset_dictionary):
     # Prevents re-generating silence-cropped audio
     if (os.path.isdir(f"Data\\no_silence\\{dataset}")):
         print('Dataset has already had silence cut from audio. Skipping... ')
-        return
+
+        with open(f'Data/no_silence/{dataset}_paths', 'rb') as f:
+            data = pickle.load(f)
+            f.close()
+        dataset_dictionary['no silence path'] = data
+        return 
     
     print('No silence-cropped data found. Generating audio without silence...')
     os.makedirs(f"Data\\no_silence\\{dataset}", exist_ok=True)
         
     dataset_dictionary['no silence path'] = []
     
-    if dataset == "RAVDESS":
+    if dataset == "RAVDESS":     # in practicality, we will only be removing audio from RAVDESS 
         sil_thresh = -65
     elif dataset == "SAVEE":
         sil_thresh = -45
@@ -199,7 +205,14 @@ def remove_silence_dataset(dataset, dataset_dictionary):
         dataset_dictionary['no silence path'].append(silence_modified_path)
         
     print('Dataset successfully cropped without silence segments.')
-    return
+
+    # Save dataset dictionary's resampled paths
+    data_filename = f'Data/no_silence/{dataset}_paths'
+    with open(data_filename, 'wb') as f:
+        pickle.dump(dataset_dictionary['no silence path'], f)
+    f.close()
+
+    return 
 
 
 def preprocess_dataset(dataset, dataset_dictionary):
@@ -252,7 +265,7 @@ def TESS():
     dataset_path = "Data\\TESS"                     # keeps the main path of the dataset
     dataset_folders = os.listdir(dataset_path)      # lists all the folders inside the dataset
 
-    TESS_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': []}
+    TESS_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': [], 'no silence path': []}
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for file in dataset_folders:
@@ -286,7 +299,7 @@ def CREMA():
     dataset_path = "Data\\CREMA"                     # keeps the main path of the dataset
     audio_files = os.listdir(dataset_path)           # lists all the folders inside the dataset
 
-    CREMA_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': []}
+    CREMA_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': [], 'no silence path': []}
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for audio in audio_files:
@@ -313,7 +326,7 @@ def SAVEE():
     dataset_path = "Data\\SAVEE"                     # keeps the main path of the dataset
     audio_files = os.listdir(dataset_path)           # lists all the folders inside the dataset
 
-    SAVEE_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': []}
+    SAVEE_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': [], 'no silence path': []}
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for audio in audio_files:
@@ -353,7 +366,7 @@ def RAVDESS():
     dataset_path = "Data\\RAVDESS"                  # keeps the main path of the dataset
     dataset_folders = os.listdir(dataset_path)      # lists all the folders inside the dataset
 
-    RAVDESS_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': []}
+    RAVDESS_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': [], 'no silence path': []}
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for file in dataset_folders:
@@ -396,7 +409,7 @@ def EMOdb():
     dataset_path = "Data\\EMOdb"                  # keeps the main path of the dataset
     audio_files = os.listdir(dataset_path)      # lists all the folders inside the dataset
 
-    EMOdb_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': []}
+    EMOdb_dictionary = {'audio path': [], 'dataset label': [], 'label': [], 'resampled audio path': [], 'no silence path': []}
 
     # going through each file in the dataset and extract the information about all the audio files inside
     for audio in audio_files:
