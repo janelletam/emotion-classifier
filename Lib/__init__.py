@@ -48,6 +48,9 @@ global_labels = {'neutral': 0, 'happy': 1, 'sad': 2, 'angry': 3, 'fearful': 4, '
 # global target sampling rate
 target_sampling_rate = 24000
 
+# global target time
+target_time = 2.0
+
 # specific label dictionaries for each dataset
 TESS_labels = {
     'angry': 'angry',
@@ -171,6 +174,18 @@ def repeat_audio(audio, sr=24000, min_target_length=4):
     if length_s < min_target_length:
         n = np.ceil(min_target_length*sr/len(audio))
         audio = np.tile(audio,int(n))
+    
+    return audio
+
+def squeeze_audio(audio, target_time=target_time, sr=target_sampling_rate):
+    # squeezes all audio files to the target length
+    duration = librosa.get_duration(y=audio, sr=sr)     # Calculate the duration of the audio in seconds
+
+    # Calculate the stretch or compression factor
+    factor = duration / 2.0
+
+    # Stretch or compress the audio to 2 seconds
+    audio = librosa.effects.time_stretch(y=audio, rate=factor)
     
     return audio
 
