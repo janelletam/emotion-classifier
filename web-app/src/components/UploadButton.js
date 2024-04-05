@@ -55,6 +55,7 @@ function UploadButton() {
           emotions: response.data.emotions,
         });
         console.log(response);
+        console.log("Accuracy received:", response.data.predictionAccuracy);
       })
       .catch((error) => {
         setLoading(false);
@@ -97,7 +98,7 @@ function UploadButton() {
               {predictionResult.emotions[predictionResult.prediction]}
             </Typography>
             <Typography sx={{ mt: 2 }} variant="subtitle1">
-              Accuracy: {Math.round(predictionResult.predictionAccuracy * 100)}%
+              Accuracy: {predictionResult.predictionAccuracy ? `${Math.round(parseFloat(predictionResult.predictionAccuracy) * 100)}%` : "N/A"}
             </Typography>
             <Typography variant="subtitle2">Confidence Levels:</Typography>
             {predictionResult.emotions.map((emotion, index) => (

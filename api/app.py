@@ -37,9 +37,10 @@ def predict():
         my_input = my_input.to(device)
         outputs = model(my_input)
         pred_accuracy, predicted = torch.max(outputs, 1)
+        confidence_scores = outputs.softmax(dim=1).squeeze()
 
     return jsonify({'prediction': predicted.item(), 
-                    'prediction accuracy':  round(pred_accuracy.item(), 2), 
+                    'prediction accuracy':  float(round(confidence_scores[predicted.item()].item(), 2)), 
                     'confidence': outputs.softmax(dim=1).squeeze().tolist(), 
                     'emotions': ['neutral', 'calm', 'happy', 'sad', 'angry', 'fearful', 'disgust', 'surprised']})
 
