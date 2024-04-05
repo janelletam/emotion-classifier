@@ -10,21 +10,22 @@ import numpy as np
 from io import BytesIO
 import torch
 import torch.optim as optim
+from torch import FloatTensor
 from model import CNNModel
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/predict": {"origins": "http://localhost:3000"}})
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Set up model
-model_path = 'api\ModelWeights\trained_model.pth' # to edit
+model_path = model_path = os.path.join('api', 'ModelWeights', 'trained_model.pth') # to edit
 model = CNNModel(num_classes=8).to(device)
 model.load_state_dict(torch.load(model_path, map_location=torch.device(device)))
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    audio_file = request.files['audio']
+    audio_file = request.files['file']
 
     # Process the audio_file (convert to wav, remove silence, resample, normalize)
     mfccs = convert_to_mfcc(audio_file)
@@ -32,7 +33,7 @@ def predict():
     # Prediction
     model.eval()
     with torch.no_grad():
-        my_input = mfccs.unsqueeze(1)
+        my_input = FloatTensor(mfccs).unsqueeze(0).unsqueeze(0) # convert numpy array into tensor
         my_input = my_input.to(device)
         outputs = model(my_input)
         pred_accuracy, predicted = torch.max(outputs, 1)
