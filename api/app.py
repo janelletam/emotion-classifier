@@ -16,7 +16,7 @@ app = Flask(__name__)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 model_path = '../ModelWeights/trained_model.pth' # to edit
-model = CNNModel(num_classes=7).to(device)
+model = CNNModel(num_classes=8).to(device)
 model.load_state_dict(torch.load(model_path, map_location=torch.device(device)))
 
 
