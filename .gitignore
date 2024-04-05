@@ -5,3 +5,5 @@ Lib/__pycache__/
 Checkpoints/
 wandb/
 Results/Checkpoints/
+web-app/api/__pycache__/
+web-app/
