@@ -37,9 +37,9 @@ def predict():
         outputs = model(my_input)
         pred_accuracy, predicted = torch.max(outputs, 1)
 
-    return jsonify({'prediction': predicted, 
-                    'prediction accuracy': pred_accuracy, 
-                    'confidence': outputs, 
+    return jsonify({'prediction': predicted.item(), 
+                    'prediction accuracy':  round(pred_accuracy.item(), 2), 
+                    'confidence': outputs.softmax(dim=1).squeeze().tolist(), 
                     'emotions': ['neutral', 'calm', 'happy', 'sad', 'angry', 'fearful', 'disgust', 'surprised']})
 
 # function to remove silence from audio
@@ -147,4 +147,3 @@ def convert_to_mfcc(audio_file):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
