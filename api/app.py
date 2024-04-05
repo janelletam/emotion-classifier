@@ -1,41 +1,46 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-import pickle
-import ClassifierModel
 from tempfile import NamedTemporaryFile
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
-import torch
 import librosa
 import soundfile as sf
 import numpy as np
 from io import BytesIO
+import torch
+import torch.optim as optim
+from model import CNNModel
 
 app = Flask(__name__)
 CORS(app)
 
-def load_model(file_path):
-    model = ClassifierModel(num_classes=7)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.load_state_dict(torch.load(file_path), map_location=device))
-    model.to(device)
-    model.eval()
-    return model
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Set up model
-model_filepath = "ModelWeights\trained_model.pth"
-model = load_model(model_filepath)
+model_path = '../ModelWeights/trained_model.pth' # to edit
+model = CNNModel(num_classes=8).to(device)
+model.load_state_dict(torch.load(model_path, map_location=torch.device(device)))
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    audio_file = request.files['file']
-    
+    audio_file = request.files['audio']
+
     # Process the audio_file (convert to wav, remove silence, resample, normalize)
     mfccs = convert_to_mfcc(audio_file)
-    prediction = model.predict(mfccs)
 
-    return jsonify({'prediction': prediction})
+    # Prediction
+    model.eval()
+    with torch.no_grad():
+        my_input = mfccs.unsqueeze(1)
+        my_input = my_input.to(device)
+        outputs = model(my_input)
+        pred_accuracy, predicted = torch.max(outputs, 1)
+
+    return jsonify({'prediction': predicted, 
+                    'prediction accuracy': pred_accuracy, 
+                    'confidence': outputs, 
+                    'emotions': ['neutral', 'calm', 'happy', 'sad', 'angry', 'fearful', 'disgust', 'surprised']})
 
 # function to remove silence from audio
 def remove_silence(input_path, output_path, min_silence_length_ms=300, silence_threshold=-50):
@@ -76,9 +81,7 @@ def normalize_data(audio_file):
  
 
 def pad_audio(audio, sr, desired_length_in_sec):
-    # desired_length is desired length of audio in seconds
     # audio is the raw audio signal as numpy array from librosa
-    # sr is sampling rate
     desired_length = int(sr * desired_length_in_sec)
 
     # Truncate if too long
@@ -102,12 +105,7 @@ def extract_mfccs(file_path=None, audio=None, n_mfcc=13):
         
     audio = pad_audio(audio, sr, 4.0)
 
-    # This returns an mfcc where the COLUMNS correspond to the frames of the audio,
-    # and ROWS represent features
     mfcc = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=n_mfcc)
-
-    # This extracts info about the first and second derivative of the mfcc
-    # so we can get an idea of how the audio changes over time
     delta_mfcc  = librosa.feature.delta(mfcc)
     delta2_mfcc = librosa.feature.delta(mfcc, order=2)
 
@@ -116,10 +114,8 @@ def extract_mfccs(file_path=None, audio=None, n_mfcc=13):
 
     # Normalize mfccs
     combined_matrix = (combined_matrix - np.mean(combined_matrix, axis=0)) / np.std(combined_matrix, axis=0)
-    # print("Combined matrix shape before transpose:", combined_matrix.shape)
 
-    # We transpose so that the ROWS correspond to the frames of the audio, 
-    # while COLUMNS represent features
+    # We transpose so that the ROWS correspond to the frames of the audio, while COLUMNS represent features
     transposed_matrix = np.transpose(combined_matrix, [1, 0])
     return transposed_matrix
 
@@ -140,17 +136,15 @@ def convert_to_mfcc(audio_file):
     resampled_audio = resample_data(no_silence_path, target_sr=target_sampling_rate)
     normalized_audio = normalize_data(resampled_audio)
     
-    # normalized_path = f'{wav_filename}_normalized'
-    # sf.write(normalized_path, normalized_audio, target_sampling_rate)
     mfccs = extract_mfccs(audio=normalized_audio)
 
     # Delete the temporary WAV file
     os.remove(wav_filename)
     os.remove(no_silence_path)
-    # os.remove(normalized_path)
 
     return mfccs
 
 
 if __name__ == '__main__':
     app.run(debug=True)
+
