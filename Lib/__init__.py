@@ -243,10 +243,7 @@ def preprocess_dataset(dataset, dataset_dictionary):
         # Resampling and normalizing
         audio_modified = resample_data(audio_path, target_sampling_rate)
         audio_modified = normalize_data(audio_modified)
-        
-        # Skipping audio looping
-        # if len(audio_modified) != 0:
-        #    audio_modified = repeat_audio(audio_modified, sr=target_sampling_rate, min_target_length=5)
+        audio_modified = squeeze_audio(audio_modified, target_time=target_time, sr=target_sampling_rate)
 
         # Save audio output as wav file
         resampled_path = f"Data\\resampled_no_silence_no_looping\\{dataset}\\{dataset}_resampled_{str(index).zfill(6)}_emotion_{dataset_dictionary['label'][index]}.wav"
