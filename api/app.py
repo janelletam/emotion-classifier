@@ -1,30 +1,41 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import os
 import pickle
+import ClassifierModel
 from tempfile import NamedTemporaryFile
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
+import torch
 import librosa
 import soundfile as sf
 import numpy as np
-
+from io import BytesIO
 
 app = Flask(__name__)
+CORS(app)
 
-model_filepath = "test"      # to edit
-model = pickle.load(open(model_filepath, 'rb'))
+def load_model(file_path):
+    model = ClassifierModel(num_classes=7)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.load_state_dict(torch.load(file_path), map_location=device))
+    model.to(device)
+    model.eval()
+    return model
 
+# Set up model
+model_filepath = "ModelWeights\trained_model.pth"
+model = load_model(model_filepath)
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    audio_file = request.files['audio']
+    audio_file = request.files['file']
     
     # Process the audio_file (convert to wav, remove silence, resample, normalize)
     mfccs = convert_to_mfcc(audio_file)
-    prediction = model(mfccs)
+    prediction = model.predict(mfccs)
 
     return jsonify({'prediction': prediction})
-
 
 # function to remove silence from audio
 def remove_silence(input_path, output_path, min_silence_length_ms=300, silence_threshold=-50):
@@ -116,7 +127,7 @@ def extract_mfccs(file_path=None, audio=None, n_mfcc=13):
 def convert_to_mfcc(audio_file):
     target_sampling_rate = 24000
 
-    audio_data = audio_file.read()
+    audio_data = BytesIO(audio_file.read())
     audio_segment = AudioSegment.from_file_using_temporary_files(audio_data)
 
     # Export AudioSegment to WAV format

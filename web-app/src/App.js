@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 // MUI components
-import RecordBox from './components/RecordBox';
+import UploadButton from './components/UploadButton';
 import Title from './components/Title';
 import { Container } from "@mui/material"
 
@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Container sx={{marginY:10}}>
         <Title/>
-        <RecordBox/>
+        <UploadButton/>
       </Container>
     </div>
   );
