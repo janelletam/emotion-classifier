@@ -26,10 +26,19 @@ def predict():
 
     # Process the audio_file (convert to wav, remove silence, resample, normalize)
     mfccs = convert_to_mfcc(audio_file)
-    model.eval()
-    prediction = model(mfccs)
 
-    return jsonify({'prediction': prediction})
+    # Prediction
+    model.eval()
+    with torch.no_grad():
+        my_input = mfccs.unsqueeze(1)
+        my_input = my_input.to(device)
+        outputs = model(my_input)
+        pred_accuracy, predicted = torch.max(outputs, 1)
+
+    return jsonify({'prediction': predicted, 
+                    'prediction accuracy': pred_accuracy, 
+                    'confidence': outputs, 
+                    'emotions': ['neutral', 'calm', 'happy', 'sad', 'angry', 'fearful', 'disgust', 'surprised']})
 
 
 # function to remove silence from audio
