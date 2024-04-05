@@ -1,14 +1,19 @@
-// Fonts
 import * as React from 'react';
 import logo from './logo.svg';
-import Button from '@mui/material/Button';
 import './App.css';
+
+// MUI components
+import RecordBox from './components/RecordBox';
+import Title from './components/Title';
+import { Container } from "@mui/material"
 
 function App() {
   return (
     <div className="App">
-      "Hi, I'm a React App!"
-      <Button variant="contained">Hello World</Button>
+      <Container sx={{marginY:10}}>
+        <Title/>
+        <RecordBox/>
+      </Container>
     </div>
   );
 }
