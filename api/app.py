@@ -103,7 +103,7 @@ def extract_mfccs(file_path=None, audio=None, n_mfcc=13):
     if (file_path!=None): audio, sr = librosa.load(file_path, sr=None)
     else: sr = 24000
         
-    audio = pad_audio(audio, sr, 4.0)
+    audio = pad_audio(audio, sr, 2.0)        # 2s audio inputs
 
     mfcc = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=n_mfcc)
     delta_mfcc  = librosa.feature.delta(mfcc)
