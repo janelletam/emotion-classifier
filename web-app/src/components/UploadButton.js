@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import cover from "./EmotionClassifierImage.png";
 import {
   Button,
   LinearProgress,
@@ -98,7 +99,7 @@ function UploadButton() {
               {predictionResult.emotions[predictionResult.prediction]}
             </Typography>
             <Typography sx={{ mt: 2 }} variant="subtitle1">
-              Accuracy: {predictionResult.predictionAccuracy ? `${Math.round(parseFloat(predictionResult.predictionAccuracy) * 100)}%` : "N/A"}
+              Confidence: {predictionResult.predictionAccuracy ? `${Math.round(parseFloat(predictionResult.predictionAccuracy) * 100)}%` : "N/A"}
             </Typography>
             <Typography variant="subtitle2">Confidence Levels:</Typography>
             {predictionResult.emotions.map((emotion, index) => (
